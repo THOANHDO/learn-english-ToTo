@@ -1,11 +1,724 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>learn english ToTo</title>
+    <title>Learn English ToTo - Lộ trình TOEIC cho người mới bắt đầu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --bg-alt: #111c34;
+            --card: rgba(15, 23, 42, 0.75);
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --primary: #38bdf8;
+            --secondary: #c084fc;
+            --accent: #f472b6;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Be Vietnam Pro", "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.15), transparent 55%),
+                        radial-gradient(circle at 30% 40%, rgba(192, 132, 252, 0.12), transparent 45%),
+                        linear-gradient(160deg, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.95));
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header.hero {
+            position: relative;
+            overflow: hidden;
+            padding: 4rem 1.5rem 5rem;
+        }
+
+        header.hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(56, 189, 248, 0.25), rgba(192, 132, 252, 0.2));
+            filter: blur(120px);
+            z-index: -1;
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.2rem, 4vw, 3.4rem);
+            margin-bottom: 1rem;
+            color: #f8fafc;
+        }
+
+        .hero-text p {
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.85rem 1.8rem;
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            color: #0f172a;
+            box-shadow: 0 15px 35px rgba(56, 189, 248, 0.35);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            color: var(--text);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        .hero-highlights {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            margin-top: 2.5rem;
+        }
+
+        .highlight {
+            background: linear-gradient(160deg, rgba(56, 189, 248, 0.15), rgba(192, 132, 252, 0.1));
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 18px;
+            padding: 1.4rem;
+            text-align: left;
+        }
+
+        .highlight span {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f8fafc;
+        }
+
+        main {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 1.5rem 5rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin: 0;
+            color: #f8fafc;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            max-width: 620px;
+            margin: 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-radius: 18px;
+            padding: 1.6rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), rgba(15, 23, 42, 0));
+            pointer-events: none;
+        }
+
+        .card .icon {
+            font-size: 1.8rem;
+        }
+
+        .card h3 {
+            margin: 0;
+            color: #f8fafc;
+            font-size: 1.2rem;
+        }
+
+        .card p, .card ul {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.97rem;
+        }
+
+        .card ul {
+            padding-left: 1.1rem;
+            display: grid;
+            gap: 0.35rem;
+        }
+
+        .card ul li::marker {
+            color: var(--primary);
+        }
+
+        .feature-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .matrix-group {
+            background: linear-gradient(160deg, rgba(56, 189, 248, 0.12), rgba(192, 132, 252, 0.12));
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            border-radius: 20px;
+            padding: 1.8rem;
+        }
+
+        .matrix-group h3 {
+            margin-top: 0;
+            color: #f8fafc;
+            font-size: 1.25rem;
+        }
+
+        .matrix-group ul {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: var(--text);
+            display: grid;
+            gap: 0.4rem;
+        }
+
+        .tag-list {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: rgba(148, 163, 184, 0.15);
+            border-radius: 999px;
+            padding: 0.45rem 0.9rem;
+            color: var(--text);
+            font-size: 0.85rem;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        .grid-two {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .stats-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stats-board .stat {
+            padding: 1.4rem;
+            border-radius: 16px;
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.1rem;
+            color: #f8fafc;
+        }
+
+        footer {
+            background: rgba(15, 23, 42, 0.85);
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+            padding: 2.5rem 1.5rem;
+        }
+
+        footer .footer-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+
+        footer p {
+            color: var(--muted);
+        }
+
+        @media (max-width: 720px) {
+            header.hero {
+                padding-top: 3.2rem;
+                padding-bottom: 3.5rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+    <header class="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <h1>Learn English ToTo – Hành trình TOEIC chuẩn hoá cho người mới bắt đầu</h1>
+                <p>Bắt đầu từ con số 0 với lộ trình được cá nhân hoá, luyện thi TOEIC hiệu quả cùng hệ thống bài học đa phương tiện, theo sát tiến độ trên mọi thiết bị. Khám phá hơn 3.000 từ vựng thiết yếu kèm IPA, chiến lược ngữ pháp và mô phỏng bài thi thực tế để chinh phục mục tiêu điểm số mơ ước.</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="#assessment">Làm bài đánh giá đầu vào</a>
+                    <a class="btn btn-outline" href="#planner">Xây lộ trình học cá nhân</a>
+                </div>
+                <div class="hero-highlights">
+                    <div class="highlight">
+                        <span>+3.000</span>
+                        Từ vựng TOEIC trọng tâm kèm IPA, hình ảnh và âm thanh chuẩn.
+                    </div>
+                    <div class="highlight">
+                        <span>100%</span>
+                        Tương thích PC & mobile với đồng bộ đám mây tức thời.
+                    </div>
+                    <div class="highlight">
+                        <span>24/7</span>
+                        Hỗ trợ học tập, giải đáp qua live chat và trung tâm trợ giúp.
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=900&q=80" alt="Người học TOEIC" style="width:100%;max-width:420px;border-radius:28px;border:1px solid rgba(148,163,184,0.3);box-shadow:0 25px 45px rgba(56,189,248,0.22);">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="assessment">
+            <div class="section-heading">
+                <h2>Hệ thống Level Assessment toàn diện</h2>
+                <p>Xác định chính xác năng lực khởi điểm, đặt mục tiêu TOEIC rõ ràng và theo dõi tiến độ nhờ phân tích dữ liệu thông minh.</p>
+            </div>
+            <div class="feature-grid">
+                <article class="card">
+                    <span class="icon">🧭</span>
+                    <h3>Placement Test chuẩn hoá</h3>
+                    <p>Bài test đầu vào thích ứng theo câu trả lời để đánh giá Reading & Listening, tạo nền tảng phù hợp cho lộ trình mới bắt đầu.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🎧</span>
+                    <h3>TOEIC Simulator</h3>
+                    <p>Mô phỏng đề thi TOEIC cập nhật mới nhất, giao diện giống bài thi thật, có chế độ phân tích câu trả lời từng phần.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">📊</span>
+                    <h3>Progress Tracking</h3>
+                    <p>Biểu đồ tiến độ theo tuần/tháng, so sánh điểm Listening - Reading, ghi nhận thời gian học và tỉ lệ chính xác.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🎯</span>
+                    <h3>Target Score Setting</h3>
+                    <p>Đặt mục tiêu điểm TOEIC, nhận nhắc nhở và gợi ý bài học phù hợp để thu hẹp khoảng cách với mục tiêu.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="vocabulary">
+            <div class="section-heading">
+                <h2>Học từ vựng TOEIC đa giác quan</h2>
+                <p>Bổ sung vốn từ vựng nền tảng với hình ảnh, âm thanh, phiên âm IPA và lịch trình lặp lại thông minh để ghi nhớ bền vững.</p>
+            </div>
+            <div class="feature-grid">
+                <article class="card">
+                    <span class="icon">📚</span>
+                    <h3>Essential TOEIC Words</h3>
+                    <p>3.000+ từ vựng phân loại theo chủ đề phổ biến, kèm phiên âm IPA, nghĩa song ngữ và collocations thực tế.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🖼️</span>
+                    <h3>Visual Flashcards</h3>
+                    <p>Thẻ từ minh hoạ bằng hình ảnh rõ ràng, có chế độ học nhanh, đảo chiều, gợi nhớ qua màu sắc.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🔊</span>
+                    <h3>Audio Pronunciation</h3>
+                    <p>Phát âm chuẩn giọng Mỹ & Anh, tốc độ điều chỉnh, đi kèm biểu đồ khẩu hình và hướng dẫn nhấn âm.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">⏰</span>
+                    <h3>Spaced Repetition</h3>
+                    <p>Thuật toán ôn tập cách quãng tự điều chỉnh, gửi nhắc nhở học từ vựng và luyện lại những từ dễ quên.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🌟</span>
+                    <h3>Word of the Day</h3>
+                    <p>Từ vựng mới mỗi ngày với video ngắn, ví dụ hội thoại và mini quiz kiểm tra ngay lập tức.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">💬</span>
+                    <h3>Context Examples</h3>
+                    <p>Câu ví dụ thực tế theo bối cảnh công việc, email, hội thoại giúp áp dụng từ vựng đúng tình huống.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="grammar">
+            <div class="section-heading">
+                <h2>Ngữ pháp cơ bản dễ hiểu – luyện tập có phản hồi</h2>
+                <p>Củng cố cấu trúc nền tảng với bài giảng video, bài tập tương tác và công cụ kiểm tra lỗi ngữ pháp tự động.</p>
+            </div>
+            <div class="feature-grid">
+                <article class="card">
+                    <span class="icon">📘</span>
+                    <h3>Grammar Lessons</h3>
+                    <p>Hơn 50 bài giảng ngắn gọn, minh hoạ bằng biểu đồ và ví dụ đời sống.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🧠</span>
+                    <h3>Interactive Exercises</h3>
+                    <p>Bài tập kéo-thả, chọn đáp án, điền từ với phản hồi tức thì và giải thích chi tiết.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🛠️</span>
+                    <h3>Grammar Checker</h3>
+                    <p>Trình kiểm tra lỗi ngữ pháp tiếng Anh cơ bản, gợi ý chỉnh sửa và giải thích quy tắc.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">📑</span>
+                    <h3>Rule Explanations</h3>
+                    <p>Giải thích từng quy tắc bằng tiếng Việt, bảng so sánh các thì, cấu trúc câu thông dụng.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🎯</span>
+                    <h3>Practice Drills</h3>
+                    <p>Bộ đề luyện tập chuyên sâu theo chủ điểm, có hệ thống đánh dấu câu dễ sai.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="listening">
+            <div class="section-heading">
+                <h2>Luyện Listening từng bước cho người mới</h2>
+                <p>Kết hợp âm thanh chậm, phụ đề và gợi ý hình ảnh giúp người mới tập trung nghe hiểu trước khi tăng dần tốc độ.</p>
+            </div>
+            <div class="feature-grid">
+                <article class="card">
+                    <span class="icon">🐢</span>
+                    <h3>Slow Speech Mode</h3>
+                    <p>Tốc độ nói 0.75x–1.0x, chuyển đổi linh hoạt để bắt kịp phát âm và nhịp điệu câu.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">📜</span>
+                    <h3>Transcript Available</h3>
+                    <p>Script song song tiếng Anh – tiếng Việt, highlight đoạn chưa nghe rõ để luyện lại.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🔁</span>
+                    <h3>Repeat Function</h3>
+                    <p>Tùy chọn lặp câu/đoạn, chế độ shadowing và ghi nhớ từ khó.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🖼️</span>
+                    <h3>Visual Cues</h3>
+                    <p>Hình ảnh gợi ý nội dung cuộc hội thoại giúp liên kết âm thanh và bối cảnh.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">📈</span>
+                    <h3>Progressive Difficulty</h3>
+                    <p>Bài nghe xếp theo cấp độ từ A1 đến B1, tăng dần độ dài và từ vựng nâng cao.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="toeic-practice">
+            <div class="section-heading">
+                <h2>Luyện thi TOEIC chuyên biệt</h2>
+                <p>Tập trung vào từng phần thi Listening và Reading với timer, bảng điểm tức thì và phân tích chi tiết.</p>
+            </div>
+            <div class="feature-matrix">
+                <div class="matrix-group">
+                    <h3>Listening Section Practice</h3>
+                    <ul>
+                        <li>Part 1 – Photographs: mô tả tranh chi tiết, kèm từ khoá.</li>
+                        <li>Part 2 – Question-Response: luyện phản xạ hỏi đáp.</li>
+                        <li>Part 3 – Short Conversations: hội thoại ngắn với chú thích.</li>
+                        <li>Part 4 – Short Talks: bài nói dài, có timer chuẩn TOEIC.</li>
+                        <li>Timer Practice: điều chỉnh thời gian theo đề thật.</li>
+                    </ul>
+                </div>
+                <div class="matrix-group">
+                    <h3>Reading Section Practice</h3>
+                    <ul>
+                        <li>Part 5 – Incomplete Sentences: luyện ngữ pháp, từ vựng.</li>
+                        <li>Part 6 – Text Completion: điền đoạn văn, chú ý mạch văn.</li>
+                        <li>Part 7 – Reading Comprehension: bài đọc đơn & kép.</li>
+                        <li>Speed Reading Tips: kỹ thuật đọc nhanh, tập trung.</li>
+                        <li>Skimming & Scanning: luyện đọc lướt và tìm thông tin.</li>
+                    </ul>
+                </div>
+                <div class="matrix-group">
+                    <h3>Mock Tests & Phân tích</h3>
+                    <ul>
+                        <li>Full-length Practice Tests: 2 tiếng theo định dạng thật.</li>
+                        <li>Mini Tests: 30–45 phút, phù hợp luyện tập hàng ngày.</li>
+                        <li>Instant Scoring: chấm điểm và quy đổi band ngay sau bài.</li>
+                        <li>Detailed Explanations: giải thích đáp án, từ vựng liên quan.</li>
+                        <li>Performance Analysis: nhận diện điểm mạnh/yếu từng phần.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="planner">
+            <div class="section-heading">
+                <h2>Study Planner thông minh</h2>
+                <p>Tổ chức lịch học, theo dõi milestone và giữ động lực mỗi ngày với nhắc nhở và phân tích thời gian học.</p>
+            </div>
+            <div class="feature-grid">
+                <article class="card">
+                    <span class="icon">🧭</span>
+                    <h3>Personalized Study Path</h3>
+                    <p>Lộ trình học cá nhân dựa trên mục tiêu điểm và kết quả placement test.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🗓️</span>
+                    <h3>Daily Goals</h3>
+                    <p>Mục tiêu học tập hàng ngày, tổng hợp tiến độ và streak.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🔔</span>
+                    <h3>Study Reminders</h3>
+                    <p>Nhắc nhở qua email/app, đồng bộ lịch Google/Apple.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">📅</span>
+                    <h3>Calendar Integration</h3>
+                    <p>Kéo thả lịch học vào calendar cá nhân, xem plan toàn tuần.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🏁</span>
+                    <h3>Progress Milestones</h3>
+                    <p>Cột mốc quan trọng với phần thưởng, hướng dẫn ôn tập giai đoạn.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="tools">
+            <div class="section-heading">
+                <h2>Interactive Learning Tools & Gamification</h2>
+                <p>Công cụ luyện phát âm AI, nhận diện giọng nói và hệ thống gamification giúp giữ vững động lực học tập.</p>
+            </div>
+            <div class="grid-two">
+                <div class="matrix-group" style="background: rgba(15,23,42,0.7); border-color: rgba(192,132,252,0.28);">
+                    <h3>Interactive Learning Tools</h3>
+                    <ul>
+                        <li>Pronunciation Trainer: AI đánh giá khẩu hình & âm sắc.</li>
+                        <li>Speech Recognition: nhận diện giọng nói, báo lỗi phát âm.</li>
+                        <li>Record & Compare: ghi âm và so sánh với bản chuẩn.</li>
+                        <li>Phonetic Guide: hướng dẫn IPA, bảng chữ cái âm vị.</li>
+                        <li>Mouth Position Videos: video cận cảnh vị trí miệng.</li>
+                    </ul>
+                </div>
+                <div class="matrix-group" style="background: rgba(15,23,42,0.7); border-color: rgba(244,114,182,0.28);">
+                    <h3>Gamification Elements</h3>
+                    <ul>
+                        <li>Points & Badges: tích điểm đổi huy hiệu theo chủ đề.</li>
+                        <li>Learning Streaks: chuỗi ngày học liên tục với phần thưởng.</li>
+                        <li>Leaderboards: bảng xếp hạng theo lớp, nhóm bạn.</li>
+                        <li>Achievements: mở khoá thành tựu khi hoàn thành milestone.</li>
+                        <li>Daily Challenges: thử thách mini mỗi ngày giữ nhịp học.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="responsive">
+            <div class="section-heading">
+                <h2>Trải nghiệm responsive mượt mà trên PC & Mobile</h2>
+                <p>Thiết kế giao diện tối ưu cho mọi kích thước màn hình, đồng bộ hoá dữ liệu tức thời và cho phép học mọi lúc mọi nơi.</p>
+            </div>
+            <div class="feature-matrix">
+                <div class="matrix-group">
+                    <h3>PC Desktop Version</h3>
+                    <ul>
+                        <li>Split Screen: chia màn hình giữa bài học & ghi chú.</li>
+                        <li>Keyboard Shortcuts: phím tắt chuyển bài, trả lời nhanh.</li>
+                        <li>Multiple Tabs: mở nhiều bài học hoặc đề luyện cùng lúc.</li>
+                        <li>Large Text Display: chế độ chữ to giảm mỏi mắt.</li>
+                        <li>Detailed Analytics: dashboard chi tiết với biểu đồ.</li>
+                    </ul>
+                </div>
+                <div class="matrix-group">
+                    <h3>Mobile Responsive Features</h3>
+                    <ul>
+                        <li>Touch-friendly Interface: nút bấm lớn, thao tác dễ dàng.</li>
+                        <li>Swipe Navigation: vuốt chuyển bài học nhanh chóng.</li>
+                        <li>Offline Mode: tải bài học về học khi không có mạng.</li>
+                        <li>Voice Commands: điều khiển bài học bằng giọng nói.</li>
+                        <li>Quick Access Menu: menu truy cập nhanh nội dung quan trọng.</li>
+                    </ul>
+                </div>
+                <div class="matrix-group">
+                    <h3>Cross-Platform Sync</h3>
+                    <ul>
+                        <li>Cloud Sync: đồng bộ tiến độ, điểm số trên mọi thiết bị.</li>
+                        <li>Resume Anywhere: tiếp tục học đúng vị trí đã dừng.</li>
+                        <li>Bookmark Sync: lưu & đồng bộ bài học yêu thích.</li>
+                        <li>Settings Sync: giữ nguyên tuỳ chỉnh cá nhân.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="beginner-support">
+            <div class="section-heading">
+                <h2>Hỗ trợ tối đa cho người mới bắt đầu</h2>
+                <p>Giao diện thân thiện, hướng dẫn rõ ràng, đa dạng phong cách học giúp bạn tự tin khởi động hành trình TOEIC.</p>
+            </div>
+            <div class="feature-matrix">
+                <div class="matrix-group">
+                    <h3>Beginner-Friendly Features</h3>
+                    <ul>
+                        <li>Tutorial Walkthrough: hướng dẫn sử dụng từng bước.</li>
+                        <li>Simple Navigation: menu rõ ràng, ít thao tác.</li>
+                        <li>Visual Progress Bars: thanh tiến độ trực quan.</li>
+                        <li>Clear Instructions: hướng dẫn cụ thể từng hoạt động.</li>
+                        <li>Error-friendly: hệ thống chấp nhận sai, gợi ý sửa.</li>
+                    </ul>
+                </div>
+                <div class="matrix-group">
+                    <h3>Learning Support</h3>
+                    <ul>
+                        <li>Study Tips: mẹo học hiệu quả, quản lý thời gian.</li>
+                        <li>FAQ Section: giải đáp thắc mắc phổ biến.</li>
+                        <li>Help Center: tài liệu hướng dẫn chi tiết.</li>
+                        <li>Video Tutorials: video minh hoạ thao tác.</li>
+                        <li>Live Chat Support: hỗ trợ trực tuyến 24/7.</li>
+                    </ul>
+                </div>
+                <div class="matrix-group">
+                    <h3>Content Adaptation</h3>
+                    <ul>
+                        <li>Adjustable Difficulty: tăng giảm độ khó theo tiến độ.</li>
+                        <li>Multiple Learning Styles: bài học cho thị giác, thính giác, vận động.</li>
+                        <li>Visual Learners: infographic, sơ đồ tư duy.</li>
+                        <li>Audio Learners: podcast, bản ghi âm.</li>
+                        <li>Kinesthetic Activities: hoạt động tương tác, kéo-thả.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="tracking">
+            <div class="section-heading">
+                <h2>Đánh giá & Theo dõi chuyên sâu</h2>
+                <p>Nắm bắt tiến độ học tập qua báo cáo tự động, phân tích kỹ năng và dự đoán điểm TOEIC để điều chỉnh chiến lược kịp thời.</p>
+            </div>
+            <div class="feature-matrix">
+                <div class="matrix-group">
+                    <h3>Performance Tracking</h3>
+                    <ul>
+                        <li>Skill Breakdown: phân tích Listening, Reading, từ vựng, ngữ pháp.</li>
+                        <li>Weakness Identification: cảnh báo kỹ năng yếu.</li>
+                        <li>Improvement Suggestions: gợi ý bài học và bài tập bù đắp.</li>
+                        <li>Study Time Tracking: ghi nhận thời gian học, biểu đồ tuần.</li>
+                        <li>Accuracy Rates: thống kê tỉ lệ đúng theo từng dạng câu hỏi.</li>
+                    </ul>
+                </div>
+                <div class="matrix-group">
+                    <h3>Reporting System</h3>
+                    <ul>
+                        <li>Weekly Reports: báo cáo tuần gửi email, PDF tải nhanh.</li>
+                        <li>Monthly Progress: đối chiếu tiến bộ theo tháng.</li>
+                        <li>TOEIC Score Prediction: dự đoán điểm dựa trên kết quả mock test.</li>
+                        <li>Certificate Generation: chứng nhận hoàn thành khoá học.</li>
+                        <li>Parent/Teacher Dashboard: bảng điều khiển cho phụ huynh, giáo viên.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="stats-board">
+                <div class="stat">
+                    <strong>85%</strong>
+                    người học đạt mục tiêu TOEIC trong 4-6 tháng với lộ trình cá nhân hoá.
+                </div>
+                <div class="stat">
+                    <strong>4.9/5</strong>
+                    điểm hài lòng về chất lượng nội dung và hỗ trợ kỹ thuật.
+                </div>
+                <div class="stat">
+                    <strong>+120k</strong>
+                    bài luyện tập được hoàn thành mỗi tuần trên hệ thống.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <h3>Learn English ToTo</h3>
+                <p>Giải pháp học TOEIC toàn diện cho người mới bắt đầu – cá nhân hoá lộ trình, luyện tập đa dạng, đồng bộ hoá trên mọi thiết bị.</p>
+            </div>
+            <div>
+                <h3>Bắt đầu ngay</h3>
+                <p>• Làm placement test trong 15 phút<br>
+                   • Thiết lập mục tiêu điểm TOEIC<br>
+                   • Nhận gợi ý bài học phù hợp trong ngày</p>
+            </div>
+            <div>
+                <h3>Kết nối</h3>
+                <p>Email: hello@learntoto.com<br>
+                   Live chat 24/7 trong ứng dụng<br>
+                   Cộng đồng học viên trên Facebook & Zalo</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
