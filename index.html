@@ -1,11 +1,3201 @@
+cat <<'EOF' > index.html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>learn english ToTo</title>
+    <title>Learn English ToTo - Nền tảng TOEIC toàn diện cho người mới</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b1221;
+            --bg-alt: #131e34;
+            --surface: rgba(15, 23, 42, 0.85);
+            --border: rgba(148, 163, 184, 0.2);
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --primary: #38bdf8;
+            --secondary: #c084fc;
+            --accent: #f472b6;
+            --success: #22d3ee;
+            --warning: #facc15;
+            --danger: #f87171;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Be Vietnam Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 55%),
+                        radial-gradient(circle at 80% 0%, rgba(244, 114, 182, 0.18), transparent 45%),
+                        linear-gradient(160deg, rgba(7, 12, 24, 1), rgba(11, 18, 33, 0.92));
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        body.large-text {
+            font-size: 1.07rem;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        header.hero {
+            position: relative;
+            padding: 4.5rem 1.5rem 5rem;
+            overflow: hidden;
+        }
+
+        header.hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.35), transparent 55%),
+                        radial-gradient(circle at 80% 0%, rgba(192, 132, 252, 0.28), transparent 45%),
+                        linear-gradient(140deg, rgba(56, 189, 248, 0.15), rgba(192, 132, 252, 0.12));
+            filter: blur(120px);
+            z-index: -1;
+        }
+
+        .hero-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.4rem, 4vw, 3.6rem);
+            margin-bottom: 1rem;
+            color: #f8fafc;
+        }
+
+        .hero-text p {
+            color: var(--muted);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.8rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid transparent;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            color: #0f172a;
+            box-shadow: 0 15px 35px rgba(56, 189, 248, 0.35);
+        }
+
+        .btn-outline {
+            border-color: rgba(148, 163, 184, 0.4);
+            color: var(--text);
+            background: rgba(15, 23, 42, 0.35);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 40px rgba(56, 189, 248, 0.28);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .hero-visual {
+            background: linear-gradient(160deg, rgba(56, 189, 248, 0.15), rgba(192, 132, 252, 0.15));
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 24px;
+            padding: 2rem;
+            backdrop-filter: blur(16px);
+        }
+
+        .hero-visual canvas {
+            width: 100%;
+        }
+
+        nav.quick-nav {
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(14px);
+            background: rgba(10, 15, 28, 0.8);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+            z-index: 15;
+        }
+
+        .quick-nav ul {
+            margin: 0;
+            padding: 0.8rem 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 0.75rem;
+            list-style: none;
+            max-width: 1180px;
+            margin-inline: auto;
+        }
+
+        .quick-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            background: rgba(15, 23, 42, 0.35);
+            color: var(--muted);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .quick-nav a:hover {
+            color: var(--text);
+            border-color: rgba(56, 189, 248, 0.5);
+        }
+
+        main {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 6rem;
+        }
+
+        section {
+            margin-bottom: 4.5rem;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: #f8fafc;
+        }
+
+        .section-heading p {
+            margin: 0;
+            max-width: 620px;
+            color: var(--muted);
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.6rem;
+            backdrop-filter: blur(12px);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--primary);
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            padding: 1.2rem;
+            border-radius: 16px;
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        .stat strong {
+            font-size: 1.5rem;
+            color: #f8fafc;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 0.35rem;
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: rgba(15, 23, 42, 0.5);
+            color: var(--text);
+            font-family: inherit;
+        }
+
+        textarea {
+            min-height: 120px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: 2px solid rgba(56, 189, 248, 0.45);
+        }
+
+        .chart {
+            width: 100%;
+            height: 220px;
+        }
+
+        .flashcard {
+            position: relative;
+            border-radius: 18px;
+            padding: 1.8rem;
+            background: linear-gradient(160deg, rgba(56, 189, 248, 0.18), rgba(192, 132, 252, 0.12));
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .flashcard img {
+            width: 72px;
+            height: 72px;
+            border-radius: 16px;
+            object-fit: cover;
+        }
+
+        .flashcard-actions {
+            margin-top: auto;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .list-inline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .list-inline li {
+            padding: 0.4rem 0.75rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            font-size: 0.85rem;
+            background: rgba(15, 23, 42, 0.55);
+        }
+
+        .pill {
+            border-radius: 999px;
+            padding: 0.35rem 0.8rem;
+            background: rgba(56, 189, 248, 0.2);
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+
+        .accordion {
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .accordion-item + .accordion-item {
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .accordion-header {
+            background: rgba(15, 23, 42, 0.45);
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 1rem 1.2rem 1.4rem;
+            background: rgba(10, 15, 28, 0.65);
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+        }
+
+        .listening-track {
+            padding: 1.2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            background: linear-gradient(160deg, rgba(2, 132, 199, 0.1), rgba(30, 64, 175, 0.1));
+            display: grid;
+            gap: 0.6rem;
+        }
+
+        .timer {
+            font-variant-numeric: tabular-nums;
+            font-weight: 600;
+            color: var(--warning);
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .calendar .day {
+            min-height: 84px;
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            padding: 0.6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .calendar .day .tasks {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            font-size: 0.72rem;
+        }
+
+        .toast-container {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            z-index: 200;
+        }
+
+        .toast {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 14px;
+            padding: 1rem 1.2rem;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.35);
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 11, 20, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 150;
+            padding: 1.5rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal .modal-content {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 20px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            padding: 1.8rem;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        .tab-list {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.2rem;
+        }
+
+        .tab-list button {
+            padding: 0.6rem 1.1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(15, 23, 42, 0.45);
+            color: var(--muted);
+            cursor: pointer;
+        }
+
+        .tab-list button.active {
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            color: #0f172a;
+            border-color: transparent;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .split-screen {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .keyboard-shortcuts {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .keyboard-shortcuts span {
+            display: inline-flex;
+            gap: 0.4rem;
+            align-items: center;
+        }
+
+        kbd {
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 6px;
+            padding: 0.15rem 0.4rem;
+            font-size: 0.75rem;
+        }
+
+        .swipe-hint {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .mobile-quick-menu {
+            position: fixed;
+            left: 50%;
+            bottom: 1rem;
+            transform: translateX(-50%);
+            display: none;
+            background: rgba(10, 15, 28, 0.92);
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            padding: 0.45rem 0.75rem;
+            backdrop-filter: blur(12px);
+            z-index: 120;
+        }
+
+        .mobile-quick-menu ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .mobile-quick-menu a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(148, 163, 184, 0.15);
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            padding: 3rem 1.5rem 4rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.18);
+            background: rgba(10, 15, 28, 0.9);
+        }
+
+        footer .footer-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .chat-widget {
+            position: fixed;
+            right: 1.5rem;
+            bottom: 5.5rem;
+            width: 320px;
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 18px;
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(12px);
+            z-index: 130;
+        }
+
+        .chat-header {
+            padding: 0.9rem 1.2rem;
+            background: rgba(56, 189, 248, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            padding: 1rem 1.2rem;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .message {
+            padding: 0.7rem 0.9rem;
+            border-radius: 14px;
+            max-width: 85%;
+            line-height: 1.5;
+        }
+
+        .message.user {
+            margin-left: auto;
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            color: #0f172a;
+        }
+
+        .message.bot {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        .chat-input {
+            padding: 0.9rem 1.2rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+        }
+
+        .drag-area {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            padding: 1rem;
+            border: 1px dashed rgba(148, 163, 184, 0.4);
+            border-radius: 16px;
+            background: rgba(15, 23, 42, 0.35);
+        }
+
+        .draggable-word {
+            padding: 0.4rem 0.8rem;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.22);
+            cursor: grab;
+        }
+
+        .drop-target {
+            min-width: 90px;
+            min-height: 40px;
+            border-bottom: 2px dashed rgba(148, 163, 184, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.2rem 0.4rem;
+            border-radius: 8px;
+        }
+
+        #tutorial-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 12, 24, 0.88);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 220;
+            padding: 1.5rem;
+        }
+
+        #tutorial-overlay.active {
+            display: flex;
+        }
+
+        .tutorial-card {
+            max-width: 520px;
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            padding: 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .tutorial-progress {
+            display: flex;
+            gap: 0.4rem;
+            justify-content: center;
+        }
+
+        .tutorial-progress span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(148, 163, 184, 0.3);
+        }
+
+        .tutorial-progress span.active {
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+        }
+
+        .certificate-preview {
+            background: #fff;
+            color: #0f172a;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .parent-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            header.hero {
+                padding-top: 3.2rem;
+            }
+
+            .chat-widget {
+                width: min(90vw, 360px);
+            }
+        }
+
+        @media (max-width: 720px) {
+            .quick-nav {
+                display: none;
+            }
+
+            .mobile-quick-menu {
+                display: block;
+            }
+
+            main {
+                padding-bottom: 8rem;
+            }
+
+            .chat-widget {
+                right: 0.75rem;
+                bottom: 7.5rem;
+                width: calc(100vw - 1.5rem);
+            }
+        }
+    </style>
 </head>
 <body>
-    
+    <div id="tutorial-overlay" aria-hidden="true">
+        <div class="tutorial-card" role="dialog" aria-modal="true">
+            <h2>Chào mừng đến Learn English ToTo</h2>
+            <p id="tutorial-text">Khởi động lộ trình TOEIC với bài đánh giá trình độ đầu vào.</p>
+            <div class="tutorial-progress" id="tutorial-progress"></div>
+            <div class="hero-actions" style="justify-content:center;">
+                <button class="btn btn-outline" id="skip-tutorial">Bỏ qua</button>
+                <button class="btn btn-primary" id="next-tutorial">Tiếp tục</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="hero" id="top">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <div class="badge">Phiên bản Beta cho người mới bắt đầu</div>
+                <h1>Lộ trình TOEIC 360° với các tính năng hoạt động thực tế</h1>
+                <p>Từ bài test xác định level, luyện từ vựng đa giác quan, nghe chậm có phụ đề, tới mô phỏng bài thi và báo cáo chi tiết. Tất cả được đồng bộ, gamify và tối ưu cho mọi thiết bị.</p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary" id="start-placement">Làm Placement Test</button>
+                    <button class="btn btn-outline" id="open-planner">Mở Study Planner</button>
+                    <button class="btn btn-ghost" id="open-tutorial">Xem hướng dẫn</button>
+                </div>
+                <ul class="list-inline" style="margin-top:1.5rem;">
+                    <li>Offline mode &amp; đồng bộ</li>
+                    <li>Voice command &amp; speech recognition</li>
+                    <li>Tính điểm, phân tích &amp; chứng chỉ</li>
+                </ul>
+            </div>
+            <div class="hero-visual">
+                <canvas id="hero-chart" width="420" height="320" aria-hidden="true"></canvas>
+                <div style="margin-top:1.5rem; display:grid; gap:0.6rem;">
+                    <div class="stat">
+                        <span>Target Score</span>
+                        <strong id="hero-target-score">650</strong>
+                        <progress id="hero-target-progress" value="0" max="990"></progress>
+                    </div>
+                    <div class="stat">
+                        <span>Chuỗi ngày học</span>
+                        <strong id="hero-streak">0</strong>
+                        <span style="color:var(--muted);">Mục tiêu: 21 ngày</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Điều hướng nhanh">
+        <ul>
+            <li><a href="#assessment">Level Assessment</a></li>
+            <li><a href="#vocabulary">Vocabulary Lab</a></li>
+            <li><a href="#grammar">Grammar Studio</a></li>
+            <li><a href="#listening">Listening Hub</a></li>
+            <li><a href="#practice">TOEIC Practice</a></li>
+            <li><a href="#mock-tests">Mock Tests</a></li>
+            <li><a href="#study-planner">Study Planner</a></li>
+            <li><a href="#tools">Công cụ tương tác</a></li>
+            <li><a href="#gamification">Gamification</a></li>
+            <li><a href="#responsive">Responsive</a></li>
+            <li><a href="#cross-platform">Đồng bộ</a></li>
+            <li><a href="#beginner">Hỗ trợ người mới</a></li>
+            <li><a href="#support">Hỗ trợ học tập</a></li>
+            <li><a href="#adaptation">Thích ứng nội dung</a></li>
+            <li><a href="#tracking">Theo dõi &amp; đánh giá</a></li>
+            <li><a href="#reporting">Báo cáo &amp; chứng chỉ</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="assessment">
+            <div class="section-heading">
+                <h2>Hệ thống Level Assessment</h2>
+                <p>Bắt đầu bằng việc xác định trình độ hiện tại, mô phỏng bài thi TOEIC, đặt mục tiêu và theo dõi tiến bộ bằng biểu đồ cập nhật tự động.</p>
+            </div>
+            <div class="grid-2" style="margin-bottom:1.5rem;">
+                <div class="card">
+                    <h3>Đặt mục tiêu điểm TOEIC</h3>
+                    <p>Chọn mục tiêu để hệ thống cá nhân hóa gợi ý học tập và gamification.</p>
+                    <input type="range" id="target-score-input" min="200" max="990" step="5">
+                    <div style="display:flex; justify-content:space-between; margin:0.6rem 0;">
+                        <span>Điểm hiện tại ước tính: <strong id="current-score-est">0</strong></span>
+                        <span>Mục tiêu: <strong id="target-score-display">650</strong></span>
+                    </div>
+                    <progress id="target-progress" value="0" max="1"></progress>
+                    <button class="btn btn-outline" id="save-target-score" style="margin-top:1rem;">Lưu mục tiêu</button>
+                    <p style="font-size:0.85rem; color:var(--muted); margin-top:0.8rem;">Gợi ý: đặt mục tiêu cao hơn 100 điểm so với trình độ hiện tại để đảm bảo thử thách vừa phải.</p>
+                </div>
+                <div class="card">
+                    <h3>Progress Tracking</h3>
+                    <canvas id="progress-chart" class="chart" aria-label="Biểu đồ điểm TOEIC theo thời gian"></canvas>
+                    <ul id="assessment-history" class="list-inline" style="margin-top:1rem;"></ul>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="card" id="placement-test-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h3>Placement Test</h3>
+                        <span class="pill" id="placement-level-pill">Chưa làm</span>
+                    </div>
+                    <form id="placement-test-form"></form>
+                    <div id="placement-result" style="margin-top:1rem;"></div>
+                </div>
+                <div class="card">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h3>TOEIC Simulator</h3>
+                        <span class="pill">Timer 15'</span>
+                    </div>
+                    <p>Trải nghiệm cấu trúc đề TOEIC với câu hỏi Listening &amp; Reading chuẩn hóa. Có bộ đếm thời gian, chấm điểm ngay và phân tích lỗi.</p>
+                    <div class="stat" style="margin:1rem 0;">
+                        <span>Lần gần nhất</span>
+                        <strong id="simulator-last-score">Chưa có</strong>
+                        <small id="simulator-last-date" style="color:var(--muted);"></small>
+                    </div>
+                    <button class="btn btn-primary" id="start-simulator">Bắt đầu mô phỏng</button>
+                    <button class="btn btn-outline" id="view-simulator-history" style="margin-top:0.6rem;">Lịch sử mô phỏng</button>
+                    <div id="simulator-history" style="margin-top:1rem; display:none;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="vocabulary">
+            <div class="section-heading">
+                <h2>Vocabulary Lab</h2>
+                <p>3000+ từ TOEIC với IPA, ví dụ thực tế, flashcard hình ảnh, âm thanh chuẩn, Word of the Day và thuật toán spaced repetition.</p>
+            </div>
+            <div class="grid-2" style="margin-bottom:1.5rem;">
+                <div class="card">
+                    <h3>Word of the Day</h3>
+                    <div class="flashcard" id="word-of-day"></div>
+                    <button class="btn btn-outline" id="refresh-word-day" style="margin-top:1rem;">Đổi từ hôm nay</button>
+                </div>
+                <div class="card">
+                    <h3>Spaced Repetition Queue</h3>
+                    <div id="spaced-repetition-list" style="display:grid; gap:0.6rem;"></div>
+                    <button class="btn btn-primary" id="start-repetition" style="margin-top:1rem;">Ôn tập ngay</button>
+                    <p class="swipe-hint">Hệ thống tự động đặt lịch 10' - 1h - 1 ngày - 3 ngày - 1 tuần.</p>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h3>Visual Flashcards</h3>
+                        <button class="btn btn-outline" id="toggle-visual-mode">Chế độ thị giác</button>
+                    </div>
+                    <div class="flashcard" id="flashcard"></div>
+                    <div class="flashcard-actions">
+                        <button class="btn btn-primary" id="play-word-audio">Nghe phát âm</button>
+                        <button class="btn btn-outline" id="mark-easy">Dễ</button>
+                        <button class="btn btn-outline" id="mark-hard">Cần ôn lại</button>
+                        <button class="btn btn-ghost" id="show-context">Ví dụ ngữ cảnh</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Essential TOEIC words</h3>
+                    <input type="search" id="word-search" placeholder="Tìm kiếm từ vựng, chủ đề hoặc IPA">
+                    <div id="word-list" style="margin-top:1rem; max-height:320px; overflow-y:auto; display:grid; gap:0.6rem;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="grammar">
+            <div class="section-heading">
+                <h2>Grammar Studio</h2>
+                <p>Học ngữ pháp qua bài học ngắn gọn, bài tập tương tác, kiểm tra lỗi nhanh và các bài luyện tập chuyên sâu.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Bài học ngữ pháp</h3>
+                    <div class="accordion" id="grammar-lessons"></div>
+                </div>
+                <div class="card">
+                    <h3>Interactive Exercises</h3>
+                    <div id="grammar-exercises"></div>
+                    <button class="btn btn-primary" id="submit-grammar-exercise" style="margin-top:1rem;">Chấm điểm</button>
+                    <div id="grammar-exercise-result" style="margin-top:1rem;"></div>
+                </div>
+                <div class="card">
+                    <h3>Grammar Checker</h3>
+                    <textarea id="grammar-check-input" placeholder="Nhập câu tiếng Anh của bạn..."></textarea>
+                    <button class="btn btn-outline" id="run-grammar-check" style="margin-top:0.8rem;">Kiểm tra lỗi</button>
+                    <ul id="grammar-check-result" style="margin-top:1rem; padding-left:1.1rem;"></ul>
+                    <div style="margin-top:1.2rem;">
+                        <h4>Practice Drills</h4>
+                        <button class="btn btn-ghost" id="start-practice-drill">Bắt đầu luyện tập 10 câu</button>
+                        <div id="practice-drill-status" style="margin-top:0.8rem;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="listening">
+            <div class="section-heading">
+                <h2>Listening Hub</h2>
+                <p>Nghe tốc độ chậm, có transcript, lặp lại, gợi ý hình ảnh và độ khó tăng dần. Hỗ trợ luyện phát âm với AI.</p>
+            </div>
+            <div class="grid-2" style="margin-bottom:1.5rem;">
+                <div class="card">
+                    <h3>Listening Lab</h3>
+                    <label for="listening-difficulty">Chọn độ khó</label>
+                    <select id="listening-difficulty">
+                        <option value="easy">Beginner</option>
+                        <option value="medium">Intermediate</option>
+                        <option value="hard">Advanced</option>
+                    </select>
+                    <div id="listening-track" class="listening-track" style="margin-top:1rem;"></div>
+                    <div class="flashcard-actions">
+                        <button class="btn btn-primary" id="play-slow">Nghe chậm</button>
+                        <button class="btn btn-outline" id="play-normal">Nghe chuẩn</button>
+                        <button class="btn btn-outline" id="repeat-audio">Lặp lại</button>
+                    </div>
+                    <p id="listening-visual" style="margin-top:1rem;"></p>
+                </div>
+                <div class="card">
+                    <h3>Listening Progress</h3>
+                    <progress id="listening-progress" value="0" max="100"></progress>
+                    <div style="display:grid; gap:0.6rem; margin-top:1rem;">
+                        <div class="stat">
+                            <span>Transcript</span>
+                            <small id="listening-transcript" style="color:var(--muted);"></small>
+                        </div>
+                        <div class="stat">
+                            <span>Số lần lặp lại</span>
+                            <strong id="repeat-count">0</strong>
+                        </div>
+                        <div class="stat">
+                            <span>Độ khó hiện tại</span>
+                            <strong id="listening-level-text">Beginner</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="practice">
+            <div class="section-heading">
+                <h2>TOEIC Practice chuyên biệt</h2>
+                <p>Luyện đủ các Part của Listening &amp; Reading với timer, giải thích chi tiết, kỹ thuật đọc nhanh và chiến thuật skimming &amp; scanning.</p>
+            </div>
+            <div class="card">
+                <div class="tab-list" role="tablist">
+                    <button class="active" data-tab="listening-part" role="tab">Listening Section</button>
+                    <button data-tab="reading-part" role="tab">Reading Section</button>
+                    <button data-tab="speed-reading" role="tab">Speed Reading</button>
+                </div>
+                <div class="tab-panel active" id="listening-part" role="tabpanel">
+                    <div class="grid-2" id="listening-parts"></div>
+                    <button class="btn btn-outline" id="start-timer" style="margin-top:1.2rem;">Bắt đầu timer 5 phút</button>
+                    <div class="timer" id="practice-timer" aria-live="polite" style="margin-top:0.6rem;">05:00</div>
+                </div>
+                <div class="tab-panel" id="reading-part" role="tabpanel">
+                    <div class="grid-2" id="reading-parts"></div>
+                    <div style="margin-top:1.2rem;">
+                        <h4>Skimming &amp; Scanning Trainer</h4>
+                        <p>Đánh dấu thông tin quan trọng trong đoạn văn dưới 45 giây.</p>
+                        <div id="skimming-text" style="background:rgba(15,23,42,0.4); padding:1rem; border-radius:14px;"></div>
+                        <button class="btn btn-outline" id="highlight-answer" style="margin-top:0.8rem;">Hiện gợi ý</button>
+                    </div>
+                </div>
+                <div class="tab-panel" id="speed-reading" role="tabpanel">
+                    <div class="split-screen">
+                        <div>
+                            <h3>Speed Reading Tips</h3>
+                            <ul id="speed-reading-tips" style="padding-left:1.2rem;"></ul>
+                            <button class="btn btn-ghost" id="start-speed-test">Bắt đầu đo tốc độ</button>
+                        </div>
+                        <div>
+                            <h3>Reading Stopwatch</h3>
+                            <p id="speed-reading-text" style="background:rgba(15,23,42,0.45); padding:1rem; border-radius:14px;"></p>
+                            <div class="flashcard-actions">
+                                <button class="btn btn-primary" id="speed-start">Start</button>
+                                <button class="btn btn-outline" id="speed-stop">Stop</button>
+                                <button class="btn btn-ghost" id="speed-reset">Reset</button>
+                            </div>
+                            <div style="margin-top:0.6rem;">
+                                <span>Thời gian: <strong id="speed-time">00:00</strong></span><br>
+                                <span>Tốc độ ước tính: <strong id="speed-wpm">0 wpm</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mock-tests">
+            <div class="section-heading">
+                <h2>Mock Tests &amp; Phân tích</h2>
+                <p>Chọn full test 2 tiếng hoặc mini test 30-45 phút, chấm điểm tức thì, giải thích chi tiết và phân tích điểm mạnh yếu.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Full-length practice test</h3>
+                    <p>200 câu với timer 120 phút. Cấu trúc chuẩn TOEIC.</p>
+                    <button class="btn btn-primary" data-test="full" id="start-full-test">Bắt đầu full test</button>
+                </div>
+                <div class="card">
+                    <h3>Mini test 30 phút</h3>
+                    <p>Gồm 40 câu trọng tâm cho người mới.</p>
+                    <button class="btn btn-outline" data-test="mini" id="start-mini-test">Bắt đầu mini test</button>
+                </div>
+                <div class="card">
+                    <h3>Instant scoring</h3>
+                    <div id="mock-test-summary"></div>
+                    <button class="btn btn-ghost" id="view-analysis" style="margin-top:0.8rem;">Xem phân tích chi tiết</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="study-planner">
+            <div class="section-heading">
+                <h2>Study Planner &amp; Lộ trình cá nhân</h2>
+                <p>Tự động đề xuất kế hoạch học hằng ngày, nhắc nhở, tích hợp lịch và milestone dựa trên mục tiêu điểm TOEIC.</p>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Personalized study path</h3>
+                    <form id="planner-form">
+                        <label for="daily-goal">Mục tiêu hàng ngày (phút học)</label>
+                        <input type="number" id="daily-goal" min="10" step="5">
+                        <label for="vocab-goal" style="margin-top:0.8rem;">Số từ vựng mỗi ngày</label>
+                        <input type="number" id="vocab-goal" min="5" step="5">
+                        <label for="study-focus" style="margin-top:0.8rem;">Ưu tiên kỹ năng</label>
+                        <select id="study-focus">
+                            <option value="listening">Listening</option>
+                            <option value="reading">Reading</option>
+                            <option value="grammar">Grammar</option>
+                            <option value="vocabulary">Vocabulary</option>
+                            <option value="speaking">Speaking</option>
+                        </select>
+                        <button class="btn btn-primary" style="margin-top:1rem;" type="submit">Lưu kế hoạch</button>
+                    </form>
+                    <div id="planner-summary" style="margin-top:1rem;"></div>
+                    <div style="margin-top:1.2rem;">
+                        <h4>Study reminders</h4>
+                        <form id="reminder-form">
+                            <label for="reminder-time">Giờ nhắc</label>
+                            <input type="time" id="reminder-time">
+                            <button class="btn btn-outline" style="margin-top:0.6rem;" type="submit">Thêm nhắc nhở</button>
+                        </form>
+                        <ul id="reminder-list" style="margin-top:0.8rem; padding-left:1.2rem;"></ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Calendar &amp; Progress milestones</h3>
+                    <div id="calendar-header" style="display:flex; justify-content:space-between; align-items:center;">
+                        <button class="btn btn-ghost" id="prev-month">◀</button>
+                        <strong id="calendar-title"></strong>
+                        <button class="btn btn-ghost" id="next-month">▶</button>
+                    </div>
+                    <div class="calendar" id="calendar"></div>
+                    <div style="margin-top:1rem;">
+                        <h4>Milestones</h4>
+                        <ul id="milestone-list" style="padding-left:1.2rem;"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="tools">
+            <div class="section-heading">
+                <h2>Interactive Learning Tools</h2>
+                <p>Pronunciation trainer với AI, nhận diện giọng nói, ghi âm so sánh, hướng dẫn phiên âm và video khẩu hình.</p>
+            </div>
+            <div class="grid-2" style="margin-bottom:1.5rem;">
+                <div class="card">
+                    <h3>Pronunciation trainer</h3>
+                    <label for="pronunciation-word">Nhập từ muốn luyện</label>
+                    <input type="text" id="pronunciation-word" placeholder="Ví dụ: schedule">
+                    <div class="flashcard-actions" style="margin-top:0.8rem;">
+                        <button class="btn btn-primary" id="speak-word">Nghe mẫu</button>
+                        <button class="btn btn-outline" id="record-word">Ghi âm</button>
+                        <button class="btn btn-ghost" id="compare-word">So sánh</button>
+                    </div>
+                    <audio id="recording-playback" controls style="width:100%; margin-top:1rem; display:none;"></audio>
+                    <div id="pronunciation-feedback" style="margin-top:0.8rem;"></div>
+                </div>
+                <div class="card">
+                    <h3>Speech recognition &amp; Voice commands</h3>
+                    <div class="flashcard-actions">
+                        <button class="btn btn-primary" id="start-recognition">Bắt đầu nhận diện</button>
+                        <button class="btn btn-outline" id="stop-recognition">Dừng</button>
+                    </div>
+                    <p id="recognition-status" style="margin-top:0.8rem;">Trạng thái: idle</p>
+                    <div id="voice-commands" style="margin-top:1rem;"></div>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Phonetic guide</h3>
+                    <table id="phonetic-table"></table>
+                </div>
+                <div class="card">
+                    <h3>Mouth position videos</h3>
+                    <div style="display:grid; gap:0.8rem;">
+                        <iframe width="100%" height="180" src="https://www.youtube.com/embed/1kAPHyHd7Lo" title="IPA Mouth Position" allowfullscreen></iframe>
+                        <iframe width="100%" height="180" src="https://www.youtube.com/embed/YkK7A0WeN5g" title="TOEIC Pronunciation" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gamification">
+            <div class="section-heading">
+                <h2>Gamification Elements</h2>
+                <p>Điểm thưởng, huy hiệu, streak, leaderboard và thử thách hàng ngày giúp duy trì động lực học.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Points &amp; badges</h3>
+                    <div class="stat">
+                        <span>Tổng điểm</span>
+                        <strong id="total-points">0</strong>
+                        <progress id="points-progress" value="0" max="1000"></progress>
+                    </div>
+                    <ul id="badge-list" style="margin-top:1rem; padding-left:1.2rem;"></ul>
+                </div>
+                <div class="card">
+                    <h3>Learning streaks</h3>
+                    <p>Hoàn thành nhiệm vụ mỗi ngày để duy trì streak.</p>
+                    <div class="stat">
+                        <span>Streak hiện tại</span>
+                        <strong id="streak-count">0</strong>
+                        <span style="color:var(--muted);">Dài nhất: <span id="max-streak">0</span> ngày</span>
+                    </div>
+                    <button class="btn btn-outline" id="log-study-day" style="margin-top:1rem;">Đánh dấu đã học hôm nay</button>
+                </div>
+                <div class="card">
+                    <h3>Leaderboards &amp; Daily challenges</h3>
+                    <div id="leaderboard"></div>
+                    <div style="margin-top:1rem;">
+                        <h4>Daily challenge</h4>
+                        <p id="daily-challenge"></p>
+                        <button class="btn btn-ghost" id="complete-challenge">Hoàn thành</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="responsive">
+            <div class="section-heading">
+                <h2>Responsive Interface</h2>
+                <p>Thiết kế chuyên biệt cho PC &amp; mobile: split screen, phím tắt, swipe, offline mode, voice command và menu truy cập nhanh.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>PC Desktop</h3>
+                    <div class="split-screen">
+                        <div>
+                            <h4>Split screen</h4>
+                            <p>Xem bài học và bài tập song song.</p>
+                        </div>
+                        <div>
+                            <h4>Detailed analytics</h4>
+                            <canvas id="analytics-chart" class="chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="keyboard-shortcuts" style="margin-top:1.2rem;">
+                        <h4>Keyboard shortcuts</h4>
+                        <span><kbd>Shift</kbd> + <kbd>L</kbd> : Mở Listening Hub</span>
+                        <span><kbd>Shift</kbd> + <kbd>V</kbd> : Vocabulary Lab</span>
+                        <span><kbd>Shift</kbd> + <kbd>P</kbd> : Study Planner</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Mobile experience</h3>
+                    <ul style="padding-left:1.2rem;">
+                        <li>Giao diện thân thiện cảm ứng</li>
+                        <li>Swipe để chuyển section</li>
+                        <li>Offline mode với service worker</li>
+                        <li>Voice commands điều hướng</li>
+                        <li>Quick access menu</li>
+                    </ul>
+                    <p class="swipe-hint">Vuốt trái/phải trên màn hình để chuyển qua section tiếp theo.</p>
+                </div>
+                <div class="card">
+                    <h3>Large text display</h3>
+                    <p>Tăng kích thước chữ cho người mới bắt đầu.</p>
+                    <button class="btn btn-outline" id="toggle-large-text">Bật/Tắt chữ lớn</button>
+                    <p style="margin-top:0.8rem;">Cài đặt sẽ được đồng bộ cho các thiết bị khác.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="cross-platform">
+            <div class="section-heading">
+                <h2>Cross-platform Sync</h2>
+                <p>Đồng bộ tiến độ trên cloud, tiếp tục học từ bất kỳ đâu, đồng bộ bookmark và cài đặt cá nhân.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Cloud sync</h3>
+                    <p>Xuất và nhập dữ liệu học tập để đồng bộ nhiều thiết bị.</p>
+                    <div class="flashcard-actions">
+                        <button class="btn btn-primary" id="export-data">Xuất dữ liệu</button>
+                        <button class="btn btn-outline" id="import-data">Nhập dữ liệu</button>
+                    </div>
+                    <textarea id="sync-data" placeholder="Dán dữ liệu JSON tại đây" style="margin-top:0.8rem; min-height:120px;"></textarea>
+                </div>
+                <div class="card">
+                    <h3>Bookmark &amp; Resume anywhere</h3>
+                    <button class="btn btn-outline" id="bookmark-section">Đánh dấu section hiện tại</button>
+                    <ul id="bookmark-list" style="margin-top:1rem; padding-left:1.2rem;"></ul>
+                </div>
+                <div class="card">
+                    <h3>Settings sync</h3>
+                    <form id="settings-form">
+                        <label for="preferred-theme">Chủ đề</label>
+                        <select id="preferred-theme">
+                            <option value="default">Gradient</option>
+                            <option value="dark">Dark minimal</option>
+                            <option value="bright">Bright focus</option>
+                        </select>
+                        <label for="learning-style" style="margin-top:0.8rem;">Phong cách học</label>
+                        <select id="learning-style">
+                            <option value="visual">Visual</option>
+                            <option value="auditory">Audio</option>
+                            <option value="kinesthetic">Kinesthetic</option>
+                        </select>
+                        <button class="btn btn-primary" style="margin-top:1rem;" type="submit">Lưu cài đặt</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="beginner">
+            <div class="section-heading">
+                <h2>Beginner-friendly hỗ trợ</h2>
+                <p>Giao diện đơn giản, hướng dẫn rõ ràng, thanh tiến độ trực quan và xử lý lỗi thân thiện với người mới.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Tutorial walkthrough</h3>
+                    <p>Hệ thống hướng dẫn từng bước lần đầu đăng nhập.</p>
+                    <button class="btn btn-primary" id="restart-tutorial">Chạy lại hướng dẫn</button>
+                </div>
+                <div class="card">
+                    <h3>Visual progress bars</h3>
+                    <progress id="beginner-progress" value="0" max="100"></progress>
+                    <p style="margin-top:0.8rem;">Tiến độ hoàn thành checklist cho người mới.</p>
+                    <ul id="beginner-checklist" style="padding-left:1.2rem; margin-top:0.8rem;"></ul>
+                </div>
+                <div class="card">
+                    <h3>Error-friendly</h3>
+                    <p>Nếu có lỗi, hệ thống sẽ đưa ra chỉ dẫn rõ ràng.</p>
+                    <div id="error-log" style="margin-top:1rem; color:var(--warning);"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="support">
+            <div class="section-heading">
+                <h2>Learning Support</h2>
+                <p>Mẹo học, FAQ, video tutorial, help center và live chat sẵn sàng hỗ trợ người mới bắt đầu.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Study tips &amp; FAQ</h3>
+                    <ul id="study-tips" style="padding-left:1.2rem;"></ul>
+                    <div class="accordion" id="faq"></div>
+                </div>
+                <div class="card">
+                    <h3>Help center</h3>
+                    <form id="help-form">
+                        <label for="help-topic">Chủ đề</label>
+                        <select id="help-topic">
+                            <option value="account">Tài khoản</option>
+                            <option value="content">Nội dung học</option>
+                            <option value="technical">Kỹ thuật</option>
+                        </select>
+                        <label for="help-message" style="margin-top:0.8rem;">Mô tả vấn đề</label>
+                        <textarea id="help-message"></textarea>
+                        <button class="btn btn-primary" style="margin-top:1rem;" type="submit">Gửi yêu cầu</button>
+                    </form>
+                    <div id="help-response" style="margin-top:1rem;"></div>
+                </div>
+                <div class="card">
+                    <h3>Video tutorials</h3>
+                    <div style="display:grid; gap:0.8rem;">
+                        <iframe width="100%" height="180" src="https://www.youtube.com/embed/TFf4vxZ7Xkk" title="TOEIC Beginner Guide" allowfullscreen></iframe>
+                        <iframe width="100%" height="180" src="https://www.youtube.com/embed/1i8aG5sECZM" title="TOEIC Listening Tricks" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="adaptation">
+            <div class="section-heading">
+                <h2>Content Adaptation</h2>
+                <p>Điều chỉnh độ khó, hỗ trợ nhiều phong cách học, cung cấp hình ảnh, âm thanh và hoạt động tương tác.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Adjustable difficulty</h3>
+                    <label for="difficulty-slider">Mức độ tổng thể</label>
+                    <input type="range" id="difficulty-slider" min="1" max="5" step="1">
+                    <p id="difficulty-label" style="margin-top:0.6rem;"></p>
+                </div>
+                <div class="card">
+                    <h3>Learning styles</h3>
+                    <div class="flashcard-actions">
+                        <button class="btn btn-primary" id="visual-mode">Visual</button>
+                        <button class="btn btn-outline" id="audio-mode">Audio</button>
+                        <button class="btn btn-ghost" id="kinesthetic-mode">Kinesthetic</button>
+                    </div>
+                    <div id="learning-style-content" style="margin-top:1rem;"></div>
+                </div>
+                <div class="card">
+                    <h3>Kinesthetic activity</h3>
+                    <p>Kéo thả để hoàn thành câu:</p>
+                    <div class="drag-area" id="drag-area"></div>
+                    <p id="drag-feedback" style="margin-top:0.6rem;"></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tracking">
+            <div class="section-heading">
+                <h2>Đánh giá &amp; Theo dõi</h2>
+                <p>Phân tích từng kỹ năng, nhận diện điểm yếu, gợi ý cải thiện, theo dõi thời gian học và tỷ lệ chính xác.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Skill breakdown</h3>
+                    <canvas id="skill-chart" class="chart"></canvas>
+                    <ul id="weakness-list" style="margin-top:1rem; padding-left:1.2rem;"></ul>
+                </div>
+                <div class="card">
+                    <h3>Study time tracking</h3>
+                    <div class="flashcard-actions">
+                        <button class="btn btn-primary" id="start-study-timer">Start session</button>
+                        <button class="btn btn-outline" id="stop-study-timer">Stop</button>
+                    </div>
+                    <p style="margin-top:0.8rem;">Thời gian hiện tại: <strong id="study-session-time">00:00</strong></p>
+                    <p>Tổng thời gian: <strong id="study-total-time">0 phút</strong></p>
+                </div>
+                <div class="card">
+                    <h3>Accuracy rates &amp; Gợi ý cải thiện</h3>
+                    <p>Tỷ lệ chính xác trung bình: <strong id="accuracy-rate">0%</strong></p>
+                    <ul id="improvement-suggestions" style="margin-top:1rem; padding-left:1.2rem;"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="reporting">
+            <div class="section-heading">
+                <h2>Báo cáo &amp; Chứng chỉ</h2>
+                <p>Nhận báo cáo tuần/tháng, dự đoán điểm TOEIC, tạo chứng chỉ và chia sẻ dashboard cho phụ huynh/giáo viên.</p>
+            </div>
+            <div class="report-grid">
+                <div class="card">
+                    <h3>Weekly &amp; Monthly reports</h3>
+                    <div id="weekly-report"></div>
+                    <div id="monthly-progress" style="margin-top:1rem;"></div>
+                </div>
+                <div class="card">
+                    <h3>TOEIC score prediction</h3>
+                    <p>Điểm dự đoán: <strong id="score-prediction">0</strong></p>
+                    <button class="btn btn-outline" id="update-prediction">Cập nhật dự đoán</button>
+                </div>
+                <div class="card">
+                    <h3>Certificate generation</h3>
+                    <label for="certificate-name">Tên hiển thị trên chứng chỉ</label>
+                    <input type="text" id="certificate-name" placeholder="Nhập tên của bạn">
+                    <button class="btn btn-primary" id="generate-certificate" style="margin-top:0.8rem;">Tạo &amp; tải chứng chỉ</button>
+                    <canvas id="certificate-canvas" width="600" height="420" style="margin-top:1rem; width:100%; border-radius:16px; background:#fff;"></canvas>
+                </div>
+            </div>
+            <div class="card" style="margin-top:1.5rem;">
+                <h3>Parent/Teacher dashboard</h3>
+                <div class="parent-dashboard">
+                    <div class="stat">
+                        <span>Tổng buổi học tuần này</span>
+                        <strong id="parent-sessions">0</strong>
+                    </div>
+                    <div class="stat">
+                        <span>Điểm mạnh</span>
+                        <strong id="parent-strength">-</strong>
+                    </div>
+                    <div class="stat">
+                        <span>Điểm cần cải thiện</span>
+                        <strong id="parent-weakness">-</strong>
+                    </div>
+                    <div class="stat">
+                        <span>Tài liệu gợi ý</span>
+                        <strong id="parent-resource">-</strong>
+                    </div>
+                </div>
+                <button class="btn btn-outline" style="margin-top:1rem;" id="share-dashboard">Sao chép báo cáo</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <h4>Learn English ToTo</h4>
+                <p>Đồng hành cùng người mới bắt đầu chinh phục TOEIC với trải nghiệm học tập toàn diện.</p>
+            </div>
+            <div>
+                <h4>Liên hệ</h4>
+                <p>Email: support@toto.vn<br>Hotline: 1900-0000</p>
+            </div>
+            <div>
+                <h4>Chính sách</h4>
+                <p><a href="#">Điều khoản sử dụng</a><br><a href="#">Chính sách bảo mật</a></p>
+            </div>
+        </div>
+        <p style="margin-top:2rem; text-align:center; color:var(--muted);">© 2024 Learn English ToTo. All rights reserved.</p>
+    </footer>
+
+    <div class="mobile-quick-menu" aria-label="Menu truy cập nhanh">
+        <ul>
+            <li><a href="#top">⬆️</a></li>
+            <li><a href="#assessment">🧠</a></li>
+            <li><a href="#vocabulary">🔤</a></li>
+            <li><a href="#study-planner">🗓️</a></li>
+            <li><a href="#reporting">📊</a></li>
+        </ul>
+    </div>
+
+    <div class="chat-widget" role="complementary" aria-label="Live chat hỗ trợ">
+        <div class="chat-header">
+            <strong>Live Chat ToTo</strong>
+            <button class="btn btn-ghost" id="clear-chat">Xóa</button>
+        </div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <form class="chat-input" id="chat-form">
+            <input type="text" id="chat-message" placeholder="Nhập câu hỏi..." autocomplete="off">
+            <button class="btn btn-primary" type="submit">Gửi</button>
+        </form>
+    </div>
+
+    <div class="toast-container" id="toast-container"></div>
+    <div class="modal" id="simulator-modal" aria-hidden="true">
+        <div class="modal-content">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3>Mô phỏng TOEIC</h3>
+                <button class="modal-close" data-close="simulator-modal">✕</button>
+            </div>
+            <p>Trả lời từng câu hỏi trong thời gian giới hạn. Khi hết giờ hệ thống tự động nộp bài.</p>
+            <div id="simulator-body"></div>
+            <div class="flashcard-actions" style="margin-top:1.2rem;">
+                <button class="btn btn-primary" id="submit-simulator">Nộp bài</button>
+                <button class="btn btn-outline" id="reset-simulator">Làm lại</button>
+            </div>
+            <div id="simulator-feedback" style="margin-top:1rem;"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="mocktest-modal" aria-hidden="true">
+        <div class="modal-content">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3>TOEIC Practice Test</h3>
+                <button class="modal-close" data-close="mocktest-modal">✕</button>
+            </div>
+            <div id="mocktest-info" style="margin-bottom:1rem;"></div>
+            <div id="mocktest-questions"></div>
+            <div class="flashcard-actions" style="margin-top:1rem;">
+                <button class="btn btn-primary" id="submit-mocktest">Nộp bài</button>
+                <button class="btn btn-outline" id="cancel-mocktest">Hủy</button>
+            </div>
+            <div id="mocktest-feedback" style="margin-top:1rem;"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="history-modal" aria-hidden="true">
+        <div class="modal-content">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3>Lịch sử làm bài</h3>
+                <button class="modal-close" data-close="history-modal">✕</button>
+            </div>
+            <div id="history-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const appKey = "toto-beginner-state-v1";
+        const now = () => new Date();
+        const defaultState = {
+            targetScore: 650,
+            currentScore: 0,
+            placementResults: [],
+            simulatorHistory: [],
+            vocabulary: {},
+            repetitionQueue: [],
+            flashcardIndex: 0,
+            visualMode: true,
+            planner: { dailyMinutes: 30, vocabPerDay: 10, focus: "listening" },
+            reminders: [],
+            calendar: {},
+            milestones: [],
+            points: 0,
+            badges: [],
+            streak: { count: 0, max: 0, lastDate: null },
+            leaderboard: [{ name: "Linh", score: 820 }, { name: "Akira", score: 780 }, { name: "You", score: 0 }],
+            challenge: { text: "Ôn 10 từ vựng và hoàn thành 1 bài nghe.", completed: false, date: new Date().toISOString().slice(0,10) },
+            settings: { largeText: false, theme: "default", learningStyle: "visual" },
+            bookmarks: [],
+            beginnerChecklist: { placement: false, vocab: false, planner: false, mock: false },
+            helpTickets: [],
+            chatHistory: [],
+            difficulty: 2,
+            dragGame: { completed: false },
+            studyTime: { sessions: [], totalMinutes: 0 },
+            accuracy: { correct: 0, total: 0 },
+            reports: { weekly: [], monthly: [] },
+            parentSnapshot: { sessions: 0, strength: "", weakness: "", resource: "" },
+            certificate: { name: "", lastGenerated: null },
+            tutorialCompleted: false
+        };
+
+        const state = loadState();
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(appKey);
+                if (!raw) return structuredClone(defaultState);
+                const parsed = JSON.parse(raw);
+                return { ...structuredClone(defaultState), ...parsed };
+            } catch (error) {
+                logError("Không thể tải dữ liệu đã lưu.");
+                return structuredClone(defaultState);
+            }
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem(appKey, JSON.stringify(state));
+            } catch (error) {
+                logError("Không thể lưu dữ liệu. Vui lòng kiểm tra bộ nhớ trình duyệt.");
+            }
+        }
+
+        function logError(message) {
+            const errorLog = document.getElementById("error-log");
+            if (errorLog) {
+                const time = now().toLocaleTimeString();
+                errorLog.innerHTML = `<div>[${time}] ${message}</div>` + errorLog.innerHTML;
+            }
+            showToast(message, "warning");
+        }
+
+        function showToast(message, type = "info") {
+            const container = document.getElementById("toast-container");
+            const toast = document.createElement("div");
+            toast.className = "toast";
+            const colors = {
+                info: "rgba(56,189,248,0.3)",
+                success: "rgba(34,211,238,0.3)",
+                warning: "rgba(250,204,21,0.3)",
+                danger: "rgba(248,113,113,0.3)"
+            };
+            toast.style.borderColor = colors[type] || colors.info;
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 4500);
+        }
+
+        const placementQuestions = [
+            {
+                id: 1,
+                question: "Choose the correct option: She ____ to work every day.",
+                options: ["go", "goes", "going", "gone"],
+                answer: "goes",
+                explanation: "She is third person singular, use 'goes'."
+            },
+            {
+                id: 2,
+                question: "What does the word 'invoice' mean?",
+                options: ["Hóa đơn", "Bảng báo giá", "Hợp đồng", "Phiếu giao hàng"],
+                answer: "Hóa đơn",
+                explanation: "Invoice nghĩa là hóa đơn thanh toán."
+            },
+            {
+                id: 3,
+                question: "Choose the sentence with correct order.",
+                options: [
+                    "We tomorrow will have a meeting",
+                    "Tomorrow we will have a meeting",
+                    "We will have tomorrow a meeting",
+                    "We will tomorrow have a meeting"
+                ],
+                answer: "Tomorrow we will have a meeting",
+                explanation: "Trạng từ chỉ thời gian 'tomorrow' thường đặt ở đầu hoặc cuối câu."
+            },
+            {
+                id: 4,
+                question: "Listen: Which picture is described?",
+                options: ["Một người đàn ông đang gọi điện", "Một phụ nữ đang đọc sách", "Hai người đang lái xe", "Một nhóm người đang ăn tối"],
+                answer: "Một người đàn ông đang gọi điện",
+                explanation: "Từ khóa 'on the phone' -> gọi điện."
+            },
+            {
+                id: 5,
+                question: "Reading: What is the main idea of the memo?",
+                options: ["Thông báo họp", "Khiếu nại sản phẩm", "Báo cáo tài chính", "Lời mời phỏng vấn"],
+                answer: "Thông báo họp",
+                explanation: "Memo đề cập đến việc sắp xếp cuộc họp."
+            }
+        ];
+
+        const vocabularyBank = [
+            { word: "agenda", ipa: "/əˈdʒen.də/", meaning: "chương trình nghị sự", example: "Let's review today's meeting agenda.", image: "https://source.unsplash.com/featured/?calendar" },
+            { word: "deadline", ipa: "/ˈded.laɪn/", meaning: "hạn chót", example: "The project deadline is next Monday.", image: "https://source.unsplash.com/featured/?deadline" },
+            { word: "invoice", ipa: "/ˈɪn.vɔɪs/", meaning: "hóa đơn", example: "Please send the invoice to accounting.", image: "https://source.unsplash.com/featured/?invoice" },
+            { word: "negotiate", ipa: "/nɪˈɡoʊ.ʃi.eɪt/", meaning: "đàm phán", example: "We will negotiate better rates.", image: "https://source.unsplash.com/featured/?negotiation" },
+            { word: "productivity", ipa: "/ˌproʊ.dəkˈtɪv.ə.t̬i/", meaning: "năng suất", example: "Productivity increased by 20%.", image: "https://source.unsplash.com/featured/?productivity" },
+            { word: "assembly", ipa: "/əˈsem.bli/", meaning: "dây chuyền lắp ráp", example: "The assembly line runs all night.", image: "https://source.unsplash.com/featured/?factory" },
+            { word: "proposal", ipa: "/prəˈpoʊ.zəl/", meaning: "đề xuất", example: "She submitted a proposal for the new campaign.", image: "https://source.unsplash.com/featured/?proposal" },
+            { word: "shipment", ipa: "/ˈʃɪp.mənt/", meaning: "lô hàng", example: "The shipment arrived this morning.", image: "https://source.unsplash.com/featured/?shipping" },
+            { word: "maintenance", ipa: "/ˈmeɪn.tən.əns/", meaning: "bảo trì", example: "The copier needs maintenance.", image: "https://source.unsplash.com/featured/?maintenance" },
+            { word: "conference", ipa: "/ˈkɑːn.fɚ.əns/", meaning: "hội nghị", example: "They will attend an international conference.", image: "https://source.unsplash.com/featured/?conference" }
+        ];
+
+        const listeningTracks = {
+            easy: {
+                text: "Hello and welcome to our office tour. On your left is the reception desk.",
+                visual: "🛎️ Reception desk with a friendly staff.",
+                cue: "picture of reception",
+                difficultyScore: 20
+            },
+            medium: {
+                text: "The next train to arrive at platform two will depart for Osaka at 10 a.m.",
+                visual: "🚆 Platform sign highlighting departure time.",
+                cue: "train schedule",
+                difficultyScore: 50
+            },
+            hard: {
+                text: "During the quarterly earnings call, executives highlighted supply chain disruptions affecting Q3 revenue.",
+                visual: "📊 Graph showing fluctuating revenue.",
+                cue: "presentation slide",
+                difficultyScore: 85
+            }
+        };
+
+        const listeningParts = [
+            { id: "part1", title: "Part 1 - Photographs", type: "listening", questions: 3 },
+            { id: "part2", title: "Part 2 - Question-Response", type: "listening", questions: 6 },
+            { id: "part3", title: "Part 3 - Short Conversations", type: "listening", questions: 10 },
+            { id: "part4", title: "Part 4 - Short Talks", type: "listening", questions: 10 }
+        ];
+
+        const readingParts = [
+            { id: "part5", title: "Part 5 - Incomplete Sentences", type: "reading", questions: 10 },
+            { id: "part6", title: "Part 6 - Text Completion", type: "reading", questions: 12 },
+            { id: "part7", title: "Part 7 - Reading Comprehension", type: "reading", questions: 16 }
+        ];
+
+        const readingPassage = "Our company is pleased to announce a new benefits package for all employees, including extended parental leave and remote work options.";
+
+        const speedTips = [
+            "Đọc lướt tiêu đề và câu đầu để nắm ý chính.",
+            "Đặt timer 45 giây để luyện skimming một đoạn.",
+            "Đánh dấu từ khóa khi scanning thông tin cụ thể.",
+            "Kết hợp đọc nhanh với ghi chú bằng ký hiệu riêng."
+        ];
+
+        const speedText = "The annual financial report shows a steady increase in revenue thanks to the successful launch of the new online platform.";
+
+        const grammarLessons = [
+            { title: "Tenses cơ bản", summary: "Simple present, past, future", content: "Simple present dùng cho thói quen, sự thật. Simple past dùng cho hành động đã xảy ra trong quá khứ có thời gian xác định." },
+            { title: "Danh từ đếm được & không đếm được", summary: "much/many, some/any", content: "Many + danh từ đếm được, much + danh từ không đếm được. Dùng some trong câu khẳng định, any trong câu phủ định và nghi vấn." },
+            { title: "Câu điều kiện", summary: "Type 0/1/2/3", content: "Type 1: If + present, will + V. Type 2: If + past simple, would + V. Type 3: If + past perfect, would have + V3." }
+        ];
+
+        const grammarExercises = [
+            { id: "g1", question: "If it ____ tomorrow, we will cancel the picnic.", options: ["rains", "rained", "rain"], answer: "rains" },
+            { id: "g2", question: "There aren't ____ chairs in the room.", options: ["much", "many", "a"], answer: "many" },
+            { id: "g3", question: "She ____ to the office every morning.", options: ["drive", "drives", "driving"], answer: "drives" }
+        ];
+
+        const skimmingHint = "Tập trung vào câu đầu và câu cuối đoạn văn để hiểu chủ đề chính.";
+
+        const mockTestSets = {
+            full: {
+                duration: 120 * 60,
+                questions: Array.from({ length: 20 }).map((_, idx) => ({
+                    id: `F${idx + 1}`,
+                    text: `Full test câu ${idx + 1}: Chọn đáp án đúng cho câu hỏi đọc hiểu.`,
+                    options: ["A", "B", "C", "D"],
+                    answer: ["A", "B", "C", "D"][idx % 4]
+                }))
+            },
+            mini: {
+                duration: 35 * 60,
+                questions: Array.from({ length: 8 }).map((_, idx) => ({
+                    id: `M${idx + 1}`,
+                    text: `Mini test câu ${idx + 1}: Chọn đáp án đúng cho câu hỏi nghe.`,
+                    options: ["A", "B", "C", "D"],
+                    answer: ["D", "A", "B", "C"][idx % 4]
+                }))
+            }
+        };
+
+        const dragSentence = {
+            text: "The project ___ completed ___ schedule.",
+            words: ["was", "ahead", "of"],
+            dropOrder: ["was", "ahead", "of"]
+        };
+
+        const tips = [
+            "Học từ theo chủ đề giúp nhớ nhanh hơn.",
+            "Nghe chép chính tả để cải thiện phát âm.",
+            "Mỗi ngày dành ít nhất 15 phút luyện đọc.",
+            "Sử dụng flashcard và nhắc lại thành tiếng."
+        ];
+
+        const faqs = [
+            { question: "Làm sao để bắt đầu?", answer: "Hoàn thành placement test và đặt mục tiêu điểm TOEIC." },
+            { question: "Có thể học offline?", answer: "Có, bật Offline mode để sử dụng phiên bản cache." },
+            { question: "Làm sao để luyện nghe tốt hơn?", answer: "Bắt đầu với Listening Hub tốc độ chậm và tăng dần độ khó." }
+        ];
+
+        const achievements = [
+            { id: "first-placement", name: "Hoàn thành placement", condition: () => state.placementResults.length > 0 },
+            { id: "first-vocab", name: "Ôn 20 từ vựng", condition: () => state.points >= 200 },
+            { id: "streak-7", name: "Streak 7 ngày", condition: () => state.streak.count >= 7 }
+        ];
+
+        const challengePool = [
+            "Học 15 từ vựng và ghi âm phát âm.",
+            "Luyện Part 2 trong 10 phút.",
+            "Hoàn thành 1 mini test và đọc phân tích.",
+            "Gửi 1 câu hỏi tới help center." 
+        ];
+
+        const phoneticRows = [
+            ["/i:/", "/ɪ/", "/e/", "/æ/"],
+            ["/u:/", "/ʊ/", "/ɔ:/", "/ɒ/"],
+            ["/ʌ/", "//:", "ə", "ɜː"],
+            ["/p/", "b", "t", "d"],
+            ["/k/", "g", "f", "v"],
+            ["/θ/", "ð", "s", "z"],
+            ["/ʃ/", "ʒ", "tʃ", "dʒ"]
+        ];
+
+        const recognitionPhrases = {
+            "mở listening": () => document.getElementById("listening").scrollIntoView({ behavior: "smooth" }),
+            "mở từ vựng": () => document.getElementById("vocabulary").scrollIntoView({ behavior: "smooth" }),
+            "mở planner": () => document.getElementById("study-planner").scrollIntoView({ behavior: "smooth" }),
+            "làm test": () => openSimulator(),
+            "bật chữ lớn": () => toggleLargeText(true)
+        };
+
+        let recorder;
+        let recordedChunks = [];
+        let recognition;
+        let simulatorTimer;
+        let simulatorTimeLeft = 0;
+        let mockTimer;
+        let mockTimeLeft = 0;
+        let speedTimer;
+        let speedStart;
+        let studyTimer;
+        let studyStart;
+        let practiceTimer;
+        let practiceTimeLeft = 5 * 60;
+
+        document.addEventListener("DOMContentLoaded", initApp);
+
+        function initApp() {
+            renderHero();
+            renderTargetScore();
+            renderProgressChart();
+            renderPlacementTest();
+            renderVocabulary();
+            renderGrammar();
+            renderListening();
+            renderPracticeSections();
+            renderSpeedReading();
+            renderPlanner();
+            renderTools();
+            renderGamification();
+            renderResponsiveAnalytics();
+            renderCrossPlatform();
+            renderBeginnerChecklist();
+            renderSupport();
+            renderAdaptation();
+            renderTracking();
+            renderReporting();
+            renderChat();
+            attachEvents();
+            buildTutorial();
+            updateDifficultyLabel();
+            registerServiceWorker();
+            updateChallenge();
+            updateLeaderboard();
+            updateHeroChart();
+        }
+        function renderHero() {
+            document.getElementById("hero-target-score").textContent = state.targetScore;
+            document.getElementById("hero-target-progress").value = Math.min(state.currentScore, 990);
+            document.getElementById("hero-streak").textContent = state.streak.count;
+        }
+
+        function renderTargetScore() {
+            const input = document.getElementById("target-score-input");
+            input.value = state.targetScore;
+            document.getElementById("target-score-display").textContent = state.targetScore;
+            document.getElementById("current-score-est").textContent = state.currentScore;
+            const progress = document.getElementById("target-progress");
+            progress.value = state.currentScore && state.targetScore ? state.currentScore / state.targetScore : 0;
+        }
+
+        function renderProgressChart() {
+            const canvas = document.getElementById("progress-chart");
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const data = state.simulatorHistory.concat(state.placementResults).slice(-10);
+            const padding = 30;
+            const width = canvas.width || canvas.clientWidth;
+            const height = canvas.height || canvas.clientHeight;
+            ctx.strokeStyle = "rgba(56,189,248,0.6)";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            if (data.length === 0) {
+                ctx.moveTo(padding, height - padding);
+                ctx.lineTo(width - padding, height - padding);
+            } else {
+                data.forEach((item, index) => {
+                    const x = padding + (index / (data.length - 1 || 1)) * (width - padding * 2);
+                    const y = height - padding - (item.score / 990) * (height - padding * 2);
+                    if (index === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                });
+            }
+            ctx.stroke();
+            ctx.fillStyle = "rgba(148,163,184,0.35)";
+            ctx.font = "12px Be Vietnam Pro";
+            ctx.fillText("Điểm", padding, padding);
+            const history = document.getElementById("assessment-history");
+            history.innerHTML = data.map(item => `<li>${item.type} ${item.score} điểm (${item.date})</li>`).join("");
+        }
+
+        function renderPlacementTest() {
+            const form = document.getElementById("placement-test-form");
+            form.innerHTML = placementQuestions.map(q => `
+                <div style="margin-bottom:1rem;">
+                    <strong>${q.id}. ${q.question}</strong>
+                    ${q.options.map(option => `
+                        <label style="display:flex; align-items:center; gap:0.4rem; margin-top:0.3rem;">
+                            <input type="radio" name="q${q.id}" value="${option}">
+                            <span>${option}</span>
+                        </label>
+                    `).join("")}
+                </div>
+            `).join("");
+        }
+
+        function renderVocabulary() {
+            renderWordOfDay();
+            renderFlashcard();
+            renderWordList();
+            renderRepetitionQueue();
+        }
+
+        function renderWordOfDay() {
+            const container = document.getElementById("word-of-day");
+            if (!container) return;
+            const today = new Date().toDateString();
+            let word = state.wordOfDay;
+            if (!word || word.date !== today) {
+                const idx = Math.floor((Date.now() / 86400000)) % vocabularyBank.length;
+                word = { ...vocabularyBank[idx], date: today };
+                state.wordOfDay = word;
+                saveState();
+            }
+            container.innerHTML = `
+                <div style="display:flex; gap:1rem; align-items:center;">
+                    <img src="${word.image}" alt="${word.word}">
+                    <div>
+                        <h3 style="margin:0;">${word.word}</h3>
+                        <p style="margin:0; color:var(--muted);">${word.ipa} · ${word.meaning}</p>
+                    </div>
+                </div>
+                <p style="margin-top:1rem;">Ví dụ: ${word.example}</p>
+            `;
+        }
+
+        function renderFlashcard() {
+            const container = document.getElementById("flashcard");
+            if (!container) return;
+            if (state.flashcardIndex >= vocabularyBank.length) state.flashcardIndex = 0;
+            const word = vocabularyBank[state.flashcardIndex];
+            container.innerHTML = `
+                <img src="${state.visualMode ? word.image : "https://source.unsplash.com/featured/?study"}" alt="${word.word}">
+                <h3 style="margin:0;">${word.word}</h3>
+                <p style="margin:0; color:var(--muted);">${word.ipa}</p>
+                <p style="margin:0;">${word.meaning}</p>
+                <p style="margin:0; display:none;" id="flashcard-example">Ví dụ: ${word.example}</p>
+            `;
+        }
+
+        function renderWordList(filter = "") {
+            const list = document.getElementById("word-list");
+            if (!list) return;
+            const normalized = filter.trim().toLowerCase();
+            list.innerHTML = vocabularyBank
+                .filter(item => !normalized || item.word.toLowerCase().includes(normalized) || item.meaning.includes(normalized) || item.ipa.includes(normalized))
+                .map(item => `<div class="stat" data-word="${item.word}">
+                    <strong>${item.word}</strong>
+                    <span>${item.ipa}</span>
+                    <small>${item.meaning}</small>
+                </div>`)
+                .join("");
+        }
+
+        function renderRepetitionQueue() {
+            const container = document.getElementById("spaced-repetition-list");
+            if (!container) return;
+            const dueWords = state.repetitionQueue
+                .map(entry => ({ ...entry, word: vocabularyBank.find(w => w.word === entry.word) }))
+                .filter(entry => entry.word)
+                .sort((a, b) => new Date(a.due) - new Date(b.due));
+            if (!dueWords.length) {
+                container.innerHTML = `<p>Chưa có từ cần ôn. Hãy đánh dấu flashcard để thêm vào danh sách.</p>`;
+                return;
+            }
+            container.innerHTML = dueWords.slice(0, 5).map(entry => `
+                <div class="stat">
+                    <strong>${entry.word.word}</strong>
+                    <span>Lần tới: ${new Date(entry.due).toLocaleString()}</span>
+                    <small>Cấp độ: ${entry.stage}</small>
+                </div>
+            `).join("");
+        }
+
+        function renderGrammar() {
+            const lessonContainer = document.getElementById("grammar-lessons");
+            lessonContainer.innerHTML = grammarLessons.map((lesson, idx) => `
+                <div class="accordion-item ${idx === 0 ? "active" : ""}">
+                    <div class="accordion-header" data-lesson="${idx}">
+                        <strong>${lesson.title}</strong>
+                        <span>${lesson.summary}</span>
+                    </div>
+                    <div class="accordion-content">${lesson.content}</div>
+                </div>
+            `).join("");
+
+            const exerciseContainer = document.getElementById("grammar-exercises");
+            exerciseContainer.innerHTML = grammarExercises.map(ex => `
+                <div style="margin-bottom:1rem;">
+                    <strong>${ex.question}</strong>
+                    ${ex.options.map(option => `
+                        <label style="display:flex; align-items:center; gap:0.4rem; margin-top:0.3rem;">
+                            <input type="radio" name="${ex.id}" value="${option}">
+                            <span>${option}</span>
+                        </label>
+                    `).join("")}
+                </div>
+            `).join("");
+        }
+
+        function renderListening() {
+            updateListeningTrack("easy");
+        }
+
+        function updateListeningTrack(level) {
+            const data = listeningTracks[level];
+            document.getElementById("listening-track").innerHTML = `
+                <strong>${level.toUpperCase()}</strong>
+                <p>${data.text}</p>
+                <small>Visual cue: ${data.visual}</small>
+            `;
+            document.getElementById("listening-transcript").textContent = data.text;
+            document.getElementById("listening-level-text").textContent = level;
+            document.getElementById("listening-visual").textContent = data.visual;
+            state.listeningLevel = level;
+        }
+
+        function renderPracticeSections() {
+            const listeningContainer = document.getElementById("listening-parts");
+            listeningContainer.innerHTML = listeningParts.map(part => `
+                <div class="stat">
+                    <strong>${part.title}</strong>
+                    <span>${part.questions} câu luyện tập</span>
+                    <button class="btn btn-outline" data-part="${part.id}" data-type="listening">Làm ngay</button>
+                </div>
+            `).join("");
+            const readingContainer = document.getElementById("reading-parts");
+            readingContainer.innerHTML = readingParts.map(part => `
+                <div class="stat">
+                    <strong>${part.title}</strong>
+                    <span>${part.questions} câu luyện tập</span>
+                    <button class="btn btn-outline" data-part="${part.id}" data-type="reading">Làm ngay</button>
+                </div>
+            `).join("");
+            document.getElementById("skimming-text").innerHTML = `<span>${readingPassage}</span>`;
+        }
+
+        function renderSpeedReading() {
+            document.getElementById("speed-reading-tips").innerHTML = speedTips.map(tip => `<li>${tip}</li>`).join("");
+            document.getElementById("speed-reading-text").textContent = speedText;
+        }
+
+        function renderPlanner() {
+            document.getElementById("daily-goal").value = state.planner.dailyMinutes;
+            document.getElementById("vocab-goal").value = state.planner.vocabPerDay;
+            document.getElementById("study-focus").value = state.planner.focus;
+            document.getElementById("planner-summary").innerHTML = `
+                <div class="stat">
+                    <span>Daily goal</span>
+                    <strong>${state.planner.dailyMinutes} phút</strong>
+                    <small>${state.planner.vocabPerDay} từ vựng · Ưu tiên ${state.planner.focus}</small>
+                </div>
+            `;
+            renderReminders();
+            renderCalendar();
+            renderMilestones();
+        }
+
+        function renderReminders() {
+            const list = document.getElementById("reminder-list");
+            list.innerHTML = state.reminders.map((rem, idx) => `<li>${rem.time} - ${rem.note || "Ôn tập TOEIC"} <button class="btn btn-ghost" data-remove-reminder="${idx}">X</button></li>`).join("");
+        }
+
+        function renderCalendar(date = new Date()) {
+            const current = state.calendarMonth ? new Date(state.calendarMonth) : date;
+            const year = current.getFullYear();
+            const month = current.getMonth();
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            state.calendarMonth = current.toISOString();
+            document.getElementById("calendar-title").textContent = `${month + 1}/${year}`;
+            const calendar = document.getElementById("calendar");
+            calendar.innerHTML = "";
+            for (let i = 0; i < firstDay; i++) {
+                const blank = document.createElement("div");
+                calendar.appendChild(blank);
+            }
+            for (let day = 1; day <= daysInMonth; day++) {
+                const cell = document.createElement("div");
+                cell.className = "day";
+                cell.innerHTML = `<strong>${day}</strong>`;
+                const key = `${year}-${month + 1}-${day}`;
+                const tasks = state.calendar[key] || [];
+                const list = document.createElement("div");
+                list.className = "tasks";
+                tasks.forEach(task => {
+                    const item = document.createElement("span");
+                    item.textContent = task;
+                    list.appendChild(item);
+                });
+                cell.appendChild(list);
+                cell.addEventListener("click", () => {
+                    const text = prompt("Thêm ghi chú học tập cho ngày này", tasks.join(", "));
+                    if (text !== null) {
+                        state.calendar[key] = text ? text.split(/,|\n/).map(s => s.trim()).filter(Boolean) : [];
+                        saveState();
+                        renderCalendar(new Date(state.calendarMonth));
+                    }
+                });
+                calendar.appendChild(cell);
+            }
+        }
+
+        function renderMilestones() {
+            const list = document.getElementById("milestone-list");
+            if (!state.milestones.length) {
+                state.milestones = [
+                    { title: "Hoàn thành Placement Test", completed: state.beginnerChecklist.placement },
+                    { title: "Đạt 200 điểm luyện tập", completed: state.points >= 200 },
+                    { title: "Hoàn thành mock test đầu tiên", completed: state.beginnerChecklist.mock }
+                ];
+            }
+            list.innerHTML = state.milestones.map((item, idx) => `<li><input type="checkbox" data-milestone="${idx}" ${item.completed ? "checked" : ""}> ${item.title}</li>`).join("");
+        }
+        function renderTools() {
+            const table = document.getElementById("phonetic-table");
+            table.innerHTML = phoneticRows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join("")}</tr>`).join("");
+            document.getElementById("voice-commands").innerHTML = Object.keys(recognitionPhrases).map(cmd => `<div class="pill">${cmd}</div>`).join("");
+        }
+
+        function renderGamification() {
+            document.getElementById("total-points").textContent = state.points;
+            document.getElementById("points-progress").value = Math.min(state.points, 1000);
+            document.getElementById("streak-count").textContent = state.streak.count;
+            document.getElementById("max-streak").textContent = state.streak.max;
+            const badgeList = document.getElementById("badge-list");
+            badgeList.innerHTML = achievements.filter(a => a.condition()).map(a => `<li>${a.name}</li>`).join("") || "<li>Chưa có huy hiệu</li>";
+        }
+
+        function renderResponsiveAnalytics() {
+            drawRadarChart("analytics-chart", {
+                listening: avgScore("listening"),
+                reading: avgScore("reading"),
+                grammar: avgScore("grammar"),
+                vocabulary: avgScore("vocabulary"),
+                speaking: avgScore("speaking")
+            });
+        }
+
+        function renderCrossPlatform() {
+            document.getElementById("preferred-theme").value = state.settings.theme;
+            document.getElementById("learning-style").value = state.settings.learningStyle;
+            document.getElementById("bookmark-list").innerHTML = state.bookmarks.map((bookmark, idx) => `<li><a href="${bookmark.href}">${bookmark.label}</a> <button class="btn btn-ghost" data-remove-bookmark="${idx}">X</button></li>`).join("");
+        }
+
+        function renderBeginnerChecklist() {
+            const items = [
+                { key: "placement", label: "Hoàn thành Placement Test" },
+                { key: "vocab", label: "Ôn 10 từ đầu tiên" },
+                { key: "planner", label: "Thiết lập study planner" },
+                { key: "mock", label: "Làm mini test" }
+            ];
+            const list = document.getElementById("beginner-checklist");
+            list.innerHTML = items.map(item => `<li><input type="checkbox" data-checklist="${item.key}" ${state.beginnerChecklist[item.key] ? "checked" : ""}> ${item.label}</li>`).join("");
+            updateBeginnerProgress();
+        }
+
+        function updateBeginnerProgress() {
+            const values = Object.values(state.beginnerChecklist);
+            const done = values.filter(Boolean).length;
+            document.getElementById("beginner-progress").value = (done / values.length) * 100;
+        }
+
+        function renderSupport() {
+            document.getElementById("study-tips").innerHTML = tips.map(t => `<li>${t}</li>`).join("");
+            const faqContainer = document.getElementById("faq");
+            faqContainer.innerHTML = faqs.map(faq => `
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <strong>${faq.question}</strong>
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-content">${faq.answer}</div>
+                </div>
+            `).join("");
+        }
+
+        function renderAdaptation() {
+            document.getElementById("difficulty-slider").value = state.difficulty;
+            renderDragGame();
+        }
+
+        function renderDragGame() {
+            const area = document.getElementById("drag-area");
+            const slots = dragSentence.text.split("___");
+            area.innerHTML = `
+                <div>${slots[0]} <span class="drop-target" data-drop="0"></span> ${slots[1]} <span class="drop-target" data-drop="1"></span> schedule.</div>
+                <div class="drag-list">${dragSentence.words.map((w, idx) => `<span draggable="true" class="draggable-word" data-word-index="${idx}">${w}</span>`).join(" ")}</div>
+            `;
+        }
+
+        function renderTracking() {
+            drawRadarChart("skill-chart", {
+                listening: avgScore("listening"),
+                reading: avgScore("reading"),
+                grammar: avgScore("grammar"),
+                vocabulary: avgScore("vocabulary"),
+                speaking: avgScore("speaking")
+            });
+            updateWeaknesses();
+            updateAccuracy();
+        }
+
+        function renderReporting() {
+            document.getElementById("weekly-report").innerHTML = state.reports.weekly.map(report => `<div class="stat"><strong>${report.week}</strong><span>${report.summary}</span></div>`).join("") || "<p>Chưa có dữ liệu.</p>";
+            document.getElementById("monthly-progress").innerHTML = state.reports.monthly.map(report => `<div class="stat"><strong>${report.month}</strong><span>${report.details}</span></div>`).join("") || "<p>Chưa có dữ liệu.</p>";
+            document.getElementById("score-prediction").textContent = state.scorePrediction || 0;
+            document.getElementById("parent-sessions").textContent = state.parentSnapshot.sessions;
+            document.getElementById("parent-strength").textContent = state.parentSnapshot.strength || "Chưa xác định";
+            document.getElementById("parent-weakness").textContent = state.parentSnapshot.weakness || "Chưa xác định";
+            document.getElementById("parent-resource").textContent = state.parentSnapshot.resource || "Sẽ cập nhật";
+            document.getElementById("certificate-name").value = state.certificate.name || "";
+        }
+
+        function renderChat() {
+            const container = document.getElementById("chat-messages");
+            container.innerHTML = state.chatHistory.map(msg => `<div class="message ${msg.role}">${msg.text}</div>`).join("");
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function attachEvents() {
+            document.getElementById("target-score-input").addEventListener("input", e => {
+                state.targetScore = parseInt(e.target.value, 10);
+                renderTargetScore();
+            });
+            document.getElementById("save-target-score").addEventListener("click", () => {
+                saveState();
+                showToast("Đã lưu mục tiêu điểm.", "success");
+            });
+            document.getElementById("start-placement").addEventListener("click", () => document.getElementById("assessment").scrollIntoView({ behavior: "smooth" }));
+            document.getElementById("open-planner").addEventListener("click", () => document.getElementById("study-planner").scrollIntoView({ behavior: "smooth" }));
+            document.getElementById("open-tutorial").addEventListener("click", () => showTutorial());
+            document.getElementById("refresh-word-day").addEventListener("click", () => {
+                state.wordOfDay = null;
+                renderWordOfDay();
+            });
+            document.getElementById("start-repetition").addEventListener("click", startRepetitionSession);
+            document.getElementById("toggle-visual-mode").addEventListener("click", () => {
+                state.visualMode = !state.visualMode;
+                renderFlashcard();
+            });
+            document.getElementById("word-search").addEventListener("input", e => renderWordList(e.target.value));
+            document.getElementById("play-word-audio").addEventListener("click", () => speakWord(vocabularyBank[state.flashcardIndex].word));
+            document.getElementById("mark-easy").addEventListener("click", () => updateSpacedRepetition("easy"));
+            document.getElementById("mark-hard").addEventListener("click", () => updateSpacedRepetition("hard"));
+            document.getElementById("show-context").addEventListener("click", () => {
+                const example = document.getElementById("flashcard-example");
+                example.style.display = example.style.display === "none" ? "block" : "none";
+            });
+            document.getElementById("placement-test-form").addEventListener("change", () => state.beginnerChecklist.placement = true);
+            document.getElementById("submit-grammar-exercise").addEventListener("click", gradeGrammarExercises);
+            document.getElementById("run-grammar-check").addEventListener("click", runGrammarCheck);
+            document.getElementById("start-practice-drill").addEventListener("click", startPracticeDrill);
+            document.getElementById("listening-difficulty").addEventListener("change", e => updateListeningTrack(e.target.value));
+            document.getElementById("play-slow").addEventListener("click", () => speakText(listeningTracks[state.listeningLevel].text, 0.8));
+            document.getElementById("play-normal").addEventListener("click", () => speakText(listeningTracks[state.listeningLevel].text, 1));
+            document.getElementById("repeat-audio").addEventListener("click", () => {
+                state.repeatCount = (state.repeatCount || 0) + 1;
+                document.getElementById("repeat-count").textContent = state.repeatCount;
+                speakText(listeningTracks[state.listeningLevel].text, 0.9);
+            });
+            document.getElementById("start-timer").addEventListener("click", startPracticeTimer);
+            document.getElementById("highlight-answer").addEventListener("click", () => showToast(skimmingHint));
+            document.getElementById("start-speed-test").addEventListener("click", () => showToast("Đọc đoạn văn trong 45 giây!"));
+            document.getElementById("speed-start").addEventListener("click", startSpeedTimer);
+            document.getElementById("speed-stop").addEventListener("click", stopSpeedTimer);
+            document.getElementById("speed-reset").addEventListener("click", resetSpeedTimer);
+            document.getElementById("start-full-test").addEventListener("click", () => openMockTest("full"));
+            document.getElementById("start-mini-test").addEventListener("click", () => openMockTest("mini"));
+            document.getElementById("view-analysis").addEventListener("click", showHistory);
+            document.getElementById("planner-form").addEventListener("submit", savePlanner);
+            document.getElementById("reminder-form").addEventListener("submit", addReminder);
+            document.getElementById("prev-month").addEventListener("click", () => navigateCalendar(-1));
+            document.getElementById("next-month").addEventListener("click", () => navigateCalendar(1));
+            document.getElementById("speak-word").addEventListener("click", () => speakWord(document.getElementById("pronunciation-word").value || vocabularyBank[state.flashcardIndex].word));
+            document.getElementById("record-word").addEventListener("click", startRecording);
+            document.getElementById("compare-word").addEventListener("click", comparePronunciation);
+            document.getElementById("start-recognition").addEventListener("click", startRecognition);
+            document.getElementById("stop-recognition").addEventListener("click", stopRecognition);
+            document.getElementById("log-study-day").addEventListener("click", logStudyDay);
+            document.getElementById("complete-challenge").addEventListener("click", completeChallenge);
+            document.getElementById("toggle-large-text").addEventListener("click", () => toggleLargeText(!state.settings.largeText));
+            document.getElementById("export-data").addEventListener("click", exportData);
+            document.getElementById("import-data").addEventListener("click", importData);
+            document.getElementById("bookmark-section").addEventListener("click", bookmarkCurrentSection);
+            document.getElementById("settings-form").addEventListener("submit", saveSettings);
+            document.getElementById("restart-tutorial").addEventListener("click", () => showTutorial(true));
+            document.getElementById("help-form").addEventListener("submit", submitHelpTicket);
+            document.getElementById("difficulty-slider").addEventListener("input", updateDifficulty);
+            document.getElementById("visual-mode").addEventListener("click", () => switchLearningStyle("visual"));
+            document.getElementById("audio-mode").addEventListener("click", () => switchLearningStyle("auditory"));
+            document.getElementById("kinesthetic-mode").addEventListener("click", () => switchLearningStyle("kinesthetic"));
+            document.getElementById("start-study-timer").addEventListener("click", startStudyTimer);
+            document.getElementById("stop-study-timer").addEventListener("click", stopStudyTimer);
+            document.getElementById("update-prediction").addEventListener("click", updatePrediction);
+            document.getElementById("generate-certificate").addEventListener("click", generateCertificate);
+            document.getElementById("share-dashboard").addEventListener("click", shareDashboard);
+            document.getElementById("chat-form").addEventListener("submit", handleChatSubmit);
+            document.getElementById("clear-chat").addEventListener("click", clearChat);
+            document.getElementById("start-simulator").addEventListener("click", openSimulator);
+            document.getElementById("submit-simulator").addEventListener("click", submitSimulator);
+            document.getElementById("reset-simulator").addEventListener("click", () => loadSimulatorQuestions());
+            document.getElementById("view-simulator-history").addEventListener("click", showSimulatorHistory);
+            document.getElementById("submit-mocktest").addEventListener("click", submitMockTest);
+            document.getElementById("cancel-mocktest").addEventListener("click", () => closeModal("mocktest-modal"));
+            document.querySelectorAll(".modal-close").forEach(btn => btn.addEventListener("click", e => closeModal(e.target.dataset.close)));
+            document.getElementById("placement-test-card").addEventListener("submit", handlePlacementSubmit);
+            document.getElementById("start-repetition").addEventListener("click", () => state.beginnerChecklist.vocab = true);
+            document.addEventListener("keydown", handleShortcuts);
+            document.getElementById("tutorial-progress").innerHTML = "";
+            document.getElementById("certificate-name").addEventListener("input", e => state.certificate.name = e.target.value);
+            enableSwipeNavigation();
+            enableDragAndDrop();
+        }
+        function handlePlacementSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            let score = 0;
+            const details = [];
+            placementQuestions.forEach(q => {
+                const answer = formData.get(`q${q.id}`);
+                if (answer === q.answer) score += 20;
+                details.push({ question: q.question, answer, correct: q.answer, explanation: q.explanation });
+            });
+            const level = score >= 80 ? "Intermediate" : score >= 60 ? "Pre-Intermediate" : "Beginner";
+            const result = { type: "Placement", score, level, date: new Date().toLocaleDateString(), details };
+            state.currentScore = Math.max(state.currentScore, score);
+            state.placementResults.push(result);
+            document.getElementById("placement-result").innerHTML = `
+                <div class="stat">
+                    <strong>${score} điểm</strong>
+                    <span>Level: ${level}</span>
+                </div>
+            `;
+            document.getElementById("placement-level-pill").textContent = level;
+            state.beginnerChecklist.placement = true;
+            addPoints(50);
+            saveState();
+            renderTargetScore();
+            renderProgressChart();
+            updateBeginnerProgress();
+            showToast("Đã chấm placement test!", "success");
+        }
+
+        function startRepetitionSession() {
+            const due = state.repetitionQueue.filter(entry => new Date(entry.due) <= now());
+            if (!due.length) {
+                showToast("Không có từ nào đến hạn. Hãy thêm từ từ flashcard.");
+                return;
+            }
+            const word = due[0].word;
+            const card = vocabularyBank.find(w => w.word === word);
+            if (card) {
+                state.flashcardIndex = vocabularyBank.indexOf(card);
+                renderFlashcard();
+                speakWord(card.word);
+            }
+        }
+
+        function updateSpacedRepetition(difficulty) {
+            const word = vocabularyBank[state.flashcardIndex].word;
+            let entry = state.repetitionQueue.find(item => item.word === word);
+            if (!entry) {
+                entry = { word, stage: 0, due: now().toISOString() };
+                state.repetitionQueue.push(entry);
+            }
+            const intervals = [10 * 60 * 1000, 60 * 60 * 1000, 24 * 60 * 60 * 1000, 3 * 24 * 60 * 60 * 1000, 7 * 24 * 60 * 60 * 1000];
+            if (difficulty === "easy") entry.stage = Math.min(entry.stage + 1, intervals.length - 1);
+            else entry.stage = Math.max(entry.stage - 1, 0);
+            entry.due = new Date(Date.now() + intervals[entry.stage]).toISOString();
+            state.beginnerChecklist.vocab = true;
+            addPoints(5);
+            saveState();
+            renderRepetitionQueue();
+            showToast("Đã cập nhật lịch ôn tập.", "success");
+        }
+
+        function speakWord(word) {
+            if (!word) return;
+            if (!("speechSynthesis" in window)) {
+                logError("Trình duyệt không hỗ trợ đọc âm.");
+                return;
+            }
+            const utter = new SpeechSynthesisUtterance(word);
+            utter.lang = "en-US";
+            utter.rate = 0.95;
+            window.speechSynthesis.speak(utter);
+        }
+
+        function speakText(text, rate = 1) {
+            if (!("speechSynthesis" in window)) return;
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.lang = "en-US";
+            utter.rate = rate;
+            window.speechSynthesis.speak(utter);
+        }
+
+        function gradeGrammarExercises() {
+            const formData = new FormData(document.getElementById("grammar-exercises"));
+            let score = 0;
+            grammarExercises.forEach(ex => {
+                const answer = formData.get(ex.id);
+                if (answer === ex.answer) score += 1;
+            });
+            const percent = Math.round((score / grammarExercises.length) * 100);
+            document.getElementById("grammar-exercise-result").innerHTML = `<div class="stat"><strong>${percent}%</strong><span>${score}/${grammarExercises.length} câu đúng</span></div>`;
+            updateAccuracy(score, grammarExercises.length);
+            addPoints(score * 2);
+            saveState();
+        }
+
+        function runGrammarCheck() {
+            const text = document.getElementById("grammar-check-input").value;
+            const result = document.getElementById("grammar-check-result");
+            const issues = [];
+            if (!/[.!?]$/.test(text.trim())) issues.push("Thêm dấu chấm kết thúc câu.");
+            if (/i\s+am\s+go/.test(text.toLowerCase())) issues.push("Sửa 'I am go' thành 'I am going'.");
+            if (/he\s+go\s/.test(text.toLowerCase())) issues.push("Thêm 'es' cho động từ khi chủ ngữ là he/she/it.");
+            result.innerHTML = issues.length ? issues.map(issue => `<li>${issue}</li>`).join("") : "<li>Không phát hiện lỗi!</li>";
+        }
+
+        function startPracticeDrill() {
+            const status = document.getElementById("practice-drill-status");
+            status.textContent = "Đang tạo 10 câu luyện tập...";
+            setTimeout(() => {
+                status.innerHTML = "<div class=\"stat\"><strong>10</strong><span>Câu luyện tập đã thêm vào Planner</span></div>";
+                addCalendarTask(new Date(), "Grammar drill 10 câu");
+                state.beginnerChecklist.mock = true;
+                updateBeginnerProgress();
+                addPoints(20);
+                saveState();
+            }, 800);
+        }
+
+        function startPracticeTimer() {
+            practiceTimeLeft = 5 * 60;
+            if (practiceTimer) clearInterval(practiceTimer);
+            practiceTimer = setInterval(() => {
+                practiceTimeLeft--;
+                document.getElementById("practice-timer").textContent = formatTime(practiceTimeLeft);
+                if (practiceTimeLeft <= 0) {
+                    clearInterval(practiceTimer);
+                    showToast("Hết giờ luyện tập!");
+                }
+            }, 1000);
+        }
+
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60).toString().padStart(2, "0");
+            const s = (seconds % 60).toString().padStart(2, "0");
+            return `${m}:${s}`;
+        }
+
+        function startSpeedTimer() {
+            if (speedTimer) return;
+            speedStart = Date.now();
+            speedTimer = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - speedStart) / 1000);
+                document.getElementById("speed-time").textContent = formatTime(elapsed);
+            }, 250);
+        }
+
+        function stopSpeedTimer() {
+            if (!speedTimer) return;
+            clearInterval(speedTimer);
+            speedTimer = null;
+            const elapsed = Math.floor((Date.now() - speedStart) / 1000);
+            const words = speedText.split(/\s+/).length;
+            const wpm = Math.round((words / elapsed) * 60);
+            document.getElementById("speed-wpm").textContent = `${wpm} wpm`;
+            updateAccuracy(Math.min(words, elapsed), words);
+            addPoints(10);
+        }
+
+        function resetSpeedTimer() {
+            clearInterval(speedTimer);
+            speedTimer = null;
+            document.getElementById("speed-time").textContent = "00:00";
+            document.getElementById("speed-wpm").textContent = "0 wpm";
+        }
+
+        function openMockTest(type) {
+            const modal = document.getElementById("mocktest-modal");
+            const data = mockTestSets[type];
+            mockTimeLeft = data.duration;
+            document.getElementById("mocktest-info").innerHTML = `<div class=\"stat\"><strong>${type === "full" ? "Full test" : "Mini test"}</strong><span>Thời gian: ${Math.round(data.duration / 60)} phút</span></div>`;
+            document.getElementById("mocktest-questions").innerHTML = data.questions.map(q => `
+                <div class="card" style="margin-bottom:1rem;">
+                    <strong>${q.id}. ${q.text}</strong>
+                    ${q.options.map(opt => `
+                        <label style="display:flex; gap:0.4rem; margin-top:0.3rem;">
+                            <input type="radio" name="${q.id}" value="${opt}">
+                            <span>${opt}</span>
+                        </label>
+                    `).join("")}
+                </div>
+            `).join("");
+            mockTimer && clearInterval(mockTimer);
+            mockTimer = setInterval(() => {
+                mockTimeLeft--;
+                document.getElementById("mocktest-info").dataset.timer = formatTime(mockTimeLeft);
+                if (mockTimeLeft <= 0) {
+                    clearInterval(mockTimer);
+                    submitMockTest();
+                }
+            }, 1000);
+            openModal("mocktest-modal");
+        }
+
+        function submitMockTest() {
+            const modal = document.getElementById("mocktest-modal");
+            const questions = modal.querySelectorAll("input[type=radio]");
+            const answers = {};
+            questions.forEach(input => {
+                if (input.checked) answers[input.name] = input.value;
+            });
+            const set = Object.values(mockTestSets).find(s => s.questions.some(q => answers[q.id] !== undefined));
+            let correct = 0;
+            if (set) {
+                set.questions.forEach(q => {
+                    if (answers[q.id] === q.answer) correct++;
+                });
+                const score = Math.round((correct / set.questions.length) * 990);
+                const result = { type: "Mock", score, correct, total: set.questions.length, date: new Date().toLocaleDateString() };
+                state.simulatorHistory.push(result);
+                document.getElementById("mock-test-summary").innerHTML = `<div class=\"stat\"><strong>${score}</strong><span>${correct}/${set.questions.length} câu đúng</span></div>`;
+                addPoints(correct * 3);
+                state.beginnerChecklist.mock = true;
+                saveState();
+                renderProgressChart();
+                updateBeginnerProgress();
+                closeModal("mocktest-modal");
+                showToast("Đã chấm mock test!", "success");
+            } else {
+                showToast("Chưa trả lời câu hỏi nào.", "warning");
+            }
+        }
+
+        function showHistory() {
+            const content = document.getElementById("history-content");
+            const history = state.simulatorHistory.concat(state.placementResults);
+            content.innerHTML = history.slice(-10).map(item => `<div class="stat"><strong>${item.type}</strong><span>${item.score} điểm (${item.date})</span></div>`).join("");
+            openModal("history-modal");
+        }
+
+        function savePlanner(event) {
+            event.preventDefault();
+            state.planner.dailyMinutes = parseInt(document.getElementById("daily-goal").value, 10) || 30;
+            state.planner.vocabPerDay = parseInt(document.getElementById("vocab-goal").value, 10) || 10;
+            state.planner.focus = document.getElementById("study-focus").value;
+            state.beginnerChecklist.planner = true;
+            saveState();
+            renderPlanner();
+            updateBeginnerProgress();
+            addPoints(15);
+            showToast("Đã lưu Study Planner", "success");
+        }
+        function addReminder(event) {
+            event.preventDefault();
+            const time = document.getElementById("reminder-time").value;
+            if (!time) return;
+            state.reminders.push({ time, note: "Study TOEIC" });
+            saveState();
+            renderReminders();
+            scheduleReminder(time);
+            showToast("Đã thêm nhắc nhở", "success");
+        }
+
+        function scheduleReminder(time) {
+            const [hours, minutes] = time.split(":").map(Number);
+            const nowDate = new Date();
+            const reminderDate = new Date();
+            reminderDate.setHours(hours, minutes, 0, 0);
+            let delay = reminderDate.getTime() - nowDate.getTime();
+            if (delay < 0) delay += 24 * 60 * 60 * 1000;
+            setTimeout(() => showToast(`Nhắc học TOEIC lúc ${time}!`, "info"), delay);
+        }
+
+        function navigateCalendar(offset) {
+            const current = new Date(state.calendarMonth);
+            current.setMonth(current.getMonth() + offset);
+            state.calendarMonth = current.toISOString();
+            saveState();
+            renderCalendar(current);
+        }
+
+        function startRecording() {
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                logError("Trình duyệt không hỗ trợ ghi âm.");
+                return;
+            }
+            navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+                recorder = new MediaRecorder(stream);
+                recordedChunks = [];
+                recorder.ondataavailable = event => recordedChunks.push(event.data);
+                recorder.onstop = () => {
+                    const blob = new Blob(recordedChunks, { type: "audio/webm" });
+                    const url = URL.createObjectURL(blob);
+                    const audio = document.getElementById("recording-playback");
+                    audio.src = url;
+                    audio.style.display = "block";
+                    showToast("Đã ghi âm xong. Nghe lại và so sánh.", "success");
+                };
+                recorder.start();
+                setTimeout(() => recorder && recorder.stop(), 4000);
+                showToast("Đang ghi âm 4 giây...", "info");
+            }).catch(() => logError("Không thể truy cập micro."));
+        }
+
+        function comparePronunciation() {
+            const target = document.getElementById("pronunciation-word").value || vocabularyBank[state.flashcardIndex].word;
+            const feedback = document.getElementById("pronunciation-feedback");
+            feedback.innerHTML = `<div class="stat"><strong>${target}</strong><span>So sánh bằng cách nghe mẫu và ghi âm của bạn.</span></div>`;
+        }
+
+        function startRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                logError("Trình duyệt không hỗ trợ Speech Recognition");
+                return;
+            }
+            recognition = new SpeechRecognition();
+            recognition.lang = "vi-VN";
+            recognition.onresult = event => {
+                const transcript = event.results[0][0].transcript.toLowerCase();
+                document.getElementById("recognition-status").textContent = `Trạng thái: ${transcript}`;
+                for (const phrase of Object.keys(recognitionPhrases)) {
+                    if (transcript.includes(phrase)) {
+                        recognitionPhrases[phrase]();
+                        showToast(`Thực hiện lệnh: ${phrase}`, "success");
+                        break;
+                    }
+                }
+            };
+            recognition.onerror = () => logError("Không thể nhận diện giọng nói.");
+            recognition.start();
+            document.getElementById("recognition-status").textContent = "Trạng thái: Listening...";
+        }
+
+        function stopRecognition() {
+            if (recognition) {
+                recognition.stop();
+                document.getElementById("recognition-status").textContent = "Trạng thái: idle";
+            }
+        }
+
+        function logStudyDay() {
+            const today = new Date().toDateString();
+            if (state.streak.lastDate === today) {
+                showToast("Bạn đã ghi nhận ngày hôm nay rồi.");
+                return;
+            }
+            const last = state.streak.lastDate ? new Date(state.streak.lastDate) : null;
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            if (last && last.toDateString() === yesterday.toDateString()) {
+                state.streak.count += 1;
+            } else {
+                state.streak.count = 1;
+            }
+            state.streak.max = Math.max(state.streak.max, state.streak.count);
+            state.streak.lastDate = today;
+            saveState();
+            renderGamification();
+            renderHero();
+            showToast(`Streak hiện tại: ${state.streak.count} ngày`, "success");
+        }
+
+        function completeChallenge() {
+            if (state.challenge.completed && state.challenge.date === new Date().toISOString().slice(0, 10)) {
+                showToast("Bạn đã hoàn thành thử thách hôm nay!", "info");
+                return;
+            }
+            state.challenge.completed = true;
+            addPoints(40);
+            showToast("Chúc mừng hoàn thành thử thách!", "success");
+            updateChallenge();
+        }
+
+        function updateChallenge() {
+            const today = new Date().toISOString().slice(0, 10);
+            if (!state.challenge || state.challenge.date !== today) {
+                state.challenge = {
+                    text: challengePool[Math.floor(Math.random() * challengePool.length)],
+                    completed: false,
+                    date: today
+                };
+            }
+            document.getElementById("daily-challenge").textContent = state.challenge.text;
+        }
+
+        function toggleLargeText(enabled) {
+            state.settings.largeText = enabled;
+            document.body.classList.toggle("large-text", enabled);
+            saveState();
+        }
+
+        function exportData() {
+            const textarea = document.getElementById("sync-data");
+            textarea.value = JSON.stringify(state, null, 2);
+            textarea.select();
+            document.execCommand("copy");
+            showToast("Đã sao chép dữ liệu để đồng bộ.", "success");
+        }
+
+        function importData() {
+            const textarea = document.getElementById("sync-data");
+            try {
+                const imported = JSON.parse(textarea.value);
+                Object.assign(state, imported);
+                saveState();
+                initApp();
+                showToast("Đã nhập dữ liệu", "success");
+            } catch (error) {
+                logError("Dữ liệu không hợp lệ");
+            }
+        }
+
+        function bookmarkCurrentSection() {
+            const section = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2).closest("section");
+            if (!section) return;
+            const label = section.querySelector("h2")?.textContent || section.id;
+            state.bookmarks.push({ href: `#${section.id}`, label });
+            saveState();
+            renderCrossPlatform();
+            showToast("Đã lưu bookmark", "success");
+        }
+
+        function saveSettings(event) {
+            event.preventDefault();
+            state.settings.theme = document.getElementById("preferred-theme").value;
+            state.settings.learningStyle = document.getElementById("learning-style").value;
+            document.body.dataset.theme = state.settings.theme;
+            saveState();
+            showToast("Đã lưu cài đặt", "success");
+        }
+
+        function submitHelpTicket(event) {
+            event.preventDefault();
+            const topic = document.getElementById("help-topic").value;
+            const message = document.getElementById("help-message").value;
+            state.helpTickets.push({ topic, message, date: new Date().toLocaleString() });
+            document.getElementById("help-response").innerHTML = `<div class="stat"><strong>Đã nhận</strong><span>Chúng tôi sẽ phản hồi trong 24h.</span></div>`;
+            addPoints(5);
+            saveState();
+            showToast("Đã gửi yêu cầu hỗ trợ", "success");
+        }
+
+        function updateDifficulty(event) {
+            state.difficulty = parseInt(event.target.value, 10);
+            updateDifficultyLabel();
+            saveState();
+        }
+
+        function updateDifficultyLabel() {
+            const labels = ["Cực dễ", "Dễ", "Trung bình", "Khó", "Rất khó"];
+            document.getElementById("difficulty-label").textContent = `Mức hiện tại: ${labels[state.difficulty - 1] || "Tùy chỉnh"}`;
+        }
+
+        function switchLearningStyle(style) {
+            state.settings.learningStyle = style;
+            saveState();
+            const content = document.getElementById("learning-style-content");
+            if (style === "visual") content.innerHTML = "<p>Sử dụng infographic, sơ đồ và hình ảnh minh họa.</p>";
+            if (style === "auditory") content.innerHTML = "<p>Nghe podcast, shadowing và đọc to.</p>";
+            if (style === "kinesthetic") content.innerHTML = "<p>Thực hành qua hoạt động kéo thả, ghi chú bằng tay.</p>";
+        }
+
+        function startStudyTimer() {
+            if (studyTimer) return;
+            studyStart = Date.now();
+            studyTimer = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - studyStart) / 1000);
+                document.getElementById("study-session-time").textContent = formatTime(elapsed);
+            }, 500);
+            showToast("Bắt đầu ghi thời gian học", "info");
+        }
+
+        function stopStudyTimer() {
+            if (!studyTimer) return;
+            clearInterval(studyTimer);
+            studyTimer = null;
+            const elapsedMinutes = Math.round((Date.now() - studyStart) / 60000);
+            state.studyTime.totalMinutes += elapsedMinutes;
+            state.studyTime.sessions.push({ minutes: elapsedMinutes, date: new Date().toLocaleString() });
+            document.getElementById("study-total-time").textContent = `${state.studyTime.totalMinutes} phút`;
+            updateStudyAnalytics();
+            saveState();
+            showToast("Đã lưu phiên học", "success");
+        }
+
+        function updateStudyAnalytics() {
+            const suggestions = document.getElementById("improvement-suggestions");
+            const total = state.studyTime.totalMinutes;
+            const tipsList = [];
+            if (total < 120) tipsList.push("Tăng thời lượng nghe thêm 15 phút/ngày.");
+            if (avgScore("listening") < 0.5) tipsList.push("Tập trung Part 2 và 3 với audio tốc độ chậm.");
+            if (!tipsList.length) tipsList.push("Tiếp tục duy trì lịch học hiện tại!");
+            suggestions.innerHTML = tipsList.map(t => `<li>${t}</li>`).join("");
+        }
+
+        function updatePrediction() {
+            const avg = (avgScore("listening") + avgScore("reading") + avgScore("grammar")) / 3;
+            state.scorePrediction = Math.round((avg || 0.5) * 990);
+            saveState();
+            renderReporting();
+            showToast("Đã cập nhật điểm dự đoán", "success");
+        }
+
+        function generateCertificate() {
+            const canvas = document.getElementById("certificate-canvas");
+            const ctx = canvas.getContext("2d");
+            ctx.fillStyle = "#f8fafc";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = "#38bdf8";
+            ctx.lineWidth = 6;
+            ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+            ctx.font = "28px Be Vietnam Pro";
+            ctx.fillStyle = "#0f172a";
+            ctx.textAlign = "center";
+            const name = state.certificate.name || "Learner";
+            ctx.fillText("Certificate of Achievement", canvas.width / 2, 120);
+            ctx.font = "22px Be Vietnam Pro";
+            ctx.fillText(name, canvas.width / 2, 190);
+            ctx.font = "18px Be Vietnam Pro";
+            ctx.fillText("Hoàn thành lộ trình TOEIC Beginner", canvas.width / 2, 230);
+            ctx.fillText(`Target score: ${state.targetScore} - Prediction: ${state.scorePrediction || 0}`, canvas.width / 2, 270);
+            ctx.fillText(new Date().toLocaleDateString(), canvas.width / 2, 320);
+            state.certificate.lastGenerated = new Date().toISOString();
+            saveState();
+            canvas.toBlob(blob => {
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = `certificate-${name}.png`;
+                link.click();
+            });
+            showToast("Đã tạo chứng chỉ", "success");
+        }
+
+        function shareDashboard() {
+            const report = `Buổi học: ${state.parentSnapshot.sessions}\nĐiểm mạnh: ${state.parentSnapshot.strength}\nĐiểm yếu: ${state.parentSnapshot.weakness}`;
+            navigator.clipboard?.writeText(report).then(() => showToast("Đã sao chép báo cáo", "success"));
+        }
+
+        function handleChatSubmit(event) {
+            event.preventDefault();
+            const input = document.getElementById("chat-message");
+            const text = input.value.trim();
+            if (!text) return;
+            state.chatHistory.push({ role: "user", text });
+            renderChat();
+            input.value = "";
+            setTimeout(() => {
+                const response = generateChatResponse(text);
+                state.chatHistory.push({ role: "bot", text: response });
+                renderChat();
+                saveState();
+            }, 500);
+        }
+
+        function generateChatResponse(text) {
+            const lower = text.toLowerCase();
+            if (lower.includes("từ vựng")) return "Hãy vào Vocabulary Lab và ôn 10 từ trong danh sách Essential.";
+            if (lower.includes("điểm")) return `Điểm dự đoán hiện tại của bạn là ${state.scorePrediction || 0}.`;
+            if (lower.includes("planner")) return "Bạn có thể điều chỉnh planner trong mục Study Planner với daily goal.";
+            return "Cảm ơn bạn! Hệ thống sẽ hỗ trợ trong 24h.";
+        }
+
+        function clearChat() {
+            state.chatHistory = [];
+            renderChat();
+            saveState();
+        }
+        function addPoints(value) {
+            state.points += value;
+            renderGamification();
+            saveState();
+        }
+
+        function updateWeaknesses() {
+            const list = document.getElementById("weakness-list");
+            const breakdown = [
+                { skill: "Listening", value: avgScore("listening") },
+                { skill: "Reading", value: avgScore("reading") },
+                { skill: "Grammar", value: avgScore("grammar") },
+                { skill: "Vocabulary", value: avgScore("vocabulary") }
+            ];
+            list.innerHTML = breakdown.sort((a, b) => a.value - b.value).map(item => `<li>${item.skill}: ${(item.value * 100).toFixed(0)}%</li>`).join("");
+        }
+
+        function avgScore(type) {
+            const relevant = state.simulatorHistory.filter(item => item.type.toLowerCase().includes(type));
+            if (!relevant.length) return state.currentScore ? state.currentScore / 990 : 0;
+            return relevant.reduce((sum, item) => sum + item.score, 0) / (relevant.length * 990);
+        }
+
+        function updateAccuracy(correct = 0, total = 0) {
+            state.accuracy.correct += correct;
+            state.accuracy.total += total;
+            const rate = state.accuracy.total ? Math.round((state.accuracy.correct / state.accuracy.total) * 100) : 0;
+            document.getElementById("accuracy-rate").textContent = `${rate}%`;
+            saveState();
+        }
+
+        function drawRadarChart(id, data) {
+            const canvas = document.getElementById(id);
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d");
+            const labels = Object.keys(data);
+            const values = Object.values(data);
+            const max = Math.max(...values, 1);
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(centerX, centerY) - 20;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = "rgba(148,163,184,0.3)";
+            for (let level = 1; level <= 5; level++) {
+                ctx.beginPath();
+                labels.forEach((label, index) => {
+                    const angle = (Math.PI * 2 * index) / labels.length - Math.PI / 2;
+                    const r = (radius / 5) * level;
+                    const x = centerX + Math.cos(angle) * r;
+                    const y = centerY + Math.sin(angle) * r;
+                    if (index === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                });
+                ctx.closePath();
+                ctx.stroke();
+            }
+            ctx.beginPath();
+            values.forEach((value, index) => {
+                const angle = (Math.PI * 2 * index) / labels.length - Math.PI / 2;
+                const r = (value / max) * radius;
+                const x = centerX + Math.cos(angle) * r;
+                const y = centerY + Math.sin(angle) * r;
+                if (index === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+            });
+            ctx.closePath();
+            ctx.fillStyle = "rgba(56,189,248,0.3)";
+            ctx.fill();
+            ctx.strokeStyle = "rgba(56,189,248,0.6)";
+            ctx.stroke();
+            ctx.fillStyle = "rgba(148,163,184,0.8)";
+            ctx.font = "12px Be Vietnam Pro";
+            labels.forEach((label, index) => {
+                const angle = (Math.PI * 2 * index) / labels.length - Math.PI / 2;
+                const x = centerX + Math.cos(angle) * (radius + 12);
+                const y = centerY + Math.sin(angle) * (radius + 12);
+                ctx.fillText(label, x - 20, y);
+            });
+        }
+
+        function addCalendarTask(date, text) {
+            const key = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+            if (!state.calendar[key]) state.calendar[key] = [];
+            state.calendar[key].push(text);
+            saveState();
+            renderCalendar(new Date(state.calendarMonth));
+        }
+
+        function openSimulator() {
+            loadSimulatorQuestions();
+            openModal("simulator-modal");
+            simulatorTimeLeft = 15 * 60;
+            simulatorTimer && clearInterval(simulatorTimer);
+            simulatorTimer = setInterval(() => {
+                simulatorTimeLeft--;
+                if (simulatorTimeLeft <= 0) {
+                    clearInterval(simulatorTimer);
+                    submitSimulator();
+                }
+            }, 1000);
+        }
+
+        function loadSimulatorQuestions() {
+            const body = document.getElementById("simulator-body");
+            const questions = placementQuestions.concat(readingParts.map((part, idx) => ({
+                id: 100 + idx,
+                question: `Reading mini ${part.title}`,
+                options: ["A", "B", "C", "D"],
+                answer: ["A", "B", "C", "D"][idx % 4],
+                explanation: "Giải thích sẽ hiển thị sau khi nộp."
+            })));
+            body.innerHTML = questions.map(q => `
+                <div class="card" style="margin-bottom:1rem;">
+                    <strong>${q.question}</strong>
+                    ${q.options.map(opt => `
+                        <label style="display:flex; gap:0.4rem; margin-top:0.3rem;">
+                            <input type="radio" name="sim-${q.id}" value="${opt}">
+                            <span>${opt}</span>
+                        </label>
+                    `).join("")}
+                </div>
+            `).join("");
+            document.getElementById("simulator-feedback").innerHTML = "";
+        }
+
+        function submitSimulator() {
+            const modal = document.getElementById("simulator-modal");
+            const inputs = modal.querySelectorAll("input[type=radio]");
+            const answers = {};
+            inputs.forEach(input => {
+                if (input.checked) answers[input.name] = input.value;
+            });
+            const questions = placementQuestions.concat(readingParts.map((part, idx) => ({
+                id: 100 + idx,
+                answer: ["A", "B", "C", "D"][idx % 4]
+            })));
+            let correct = 0;
+            questions.forEach(q => {
+                if (answers[`sim-${q.id}`] === q.answer) correct++;
+            });
+            const score = Math.round((correct / questions.length) * 990);
+            const feedback = document.getElementById("simulator-feedback");
+            feedback.innerHTML = `<div class="stat"><strong>${score}</strong><span>${correct}/${questions.length} câu đúng</span></div>`;
+            state.simulatorHistory.push({ type: "Simulator", score, correct, total: questions.length, date: new Date().toLocaleDateString() });
+            state.currentScore = Math.max(state.currentScore, score);
+            document.getElementById("simulator-last-score").textContent = `${score} điểm`;
+            document.getElementById("simulator-last-date").textContent = new Date().toLocaleString();
+            addPoints(correct * 4);
+            saveState();
+            renderProgressChart();
+            renderHero();
+            showToast("Đã hoàn thành TOEIC simulator", "success");
+        }
+
+        function showSimulatorHistory() {
+            const container = document.getElementById("simulator-history");
+            if (container.style.display === "none") container.style.display = "block"; else container.style.display = "none";
+            container.innerHTML = state.simulatorHistory.slice(-5).map(item => `<div>${item.date}: ${item.score} điểm</div>`).join("");
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.add("active");
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove("active");
+        }
+
+        function handleShortcuts(event) {
+            if (event.shiftKey && event.key.toLowerCase() === "l") {
+                document.getElementById("listening").scrollIntoView({ behavior: "smooth" });
+            }
+            if (event.shiftKey && event.key.toLowerCase() === "v") {
+                document.getElementById("vocabulary").scrollIntoView({ behavior: "smooth" });
+            }
+            if (event.shiftKey && event.key.toLowerCase() === "p") {
+                document.getElementById("study-planner").scrollIntoView({ behavior: "smooth" });
+            }
+        }
+
+        function enableSwipeNavigation() {
+            let startX = 0;
+            document.addEventListener("touchstart", event => {
+                startX = event.touches[0].clientX;
+            });
+            document.addEventListener("touchend", event => {
+                const diff = event.changedTouches[0].clientX - startX;
+                if (Math.abs(diff) > 120) {
+                    const sections = Array.from(document.querySelectorAll("section"));
+                    const current = sections.findIndex(section => section.getBoundingClientRect().top >= 0 && section.getBoundingClientRect().top < window.innerHeight / 2);
+                    if (diff < 0 && sections[current + 1]) sections[current + 1].scrollIntoView({ behavior: "smooth" });
+                    if (diff > 0 && sections[current - 1]) sections[current - 1].scrollIntoView({ behavior: "smooth" });
+                }
+            });
+        }
+
+        function enableDragAndDrop() {
+            document.addEventListener("dragstart", event => {
+                if (event.target.classList.contains("draggable-word")) {
+                    event.dataTransfer.setData("text/plain", event.target.textContent);
+                }
+            });
+            document.addEventListener("dragover", event => {
+                if (event.target.classList.contains("drop-target")) {
+                    event.preventDefault();
+                }
+            });
+            document.addEventListener("drop", event => {
+                if (event.target.classList.contains("drop-target")) {
+                    event.preventDefault();
+                    const word = event.dataTransfer.getData("text/plain");
+                    event.target.textContent = word;
+                    checkDragGame();
+                }
+            });
+        }
+
+        function checkDragGame() {
+            const targets = Array.from(document.querySelectorAll(".drop-target"));
+            if (targets.length < dragSentence.dropOrder.length) return;
+            const success = targets.every((target, idx) => target.textContent.trim().toLowerCase() === dragSentence.dropOrder[idx]);
+            if (success) {
+                if (!state.dragGame.completed) {
+                    state.dragGame.completed = true;
+                    addPoints(20);
+                    showToast("Hoàn thành hoạt động kéo thả!", "success");
+                }
+            }
+        }
+
+        function buildTutorial() {
+            const progress = document.getElementById("tutorial-progress");
+            progress.innerHTML = "";
+            for (let i = 0; i < 4; i++) {
+                const dot = document.createElement("span");
+                if (i === 0) dot.classList.add("active");
+                progress.appendChild(dot);
+            }
+            document.getElementById("next-tutorial").addEventListener("click", advanceTutorial);
+            document.getElementById("skip-tutorial").addEventListener("click", () => closeTutorial());
+            if (!state.tutorialCompleted) showTutorial();
+        }
+
+        let tutorialStep = 0;
+
+        function showTutorial(force = false) {
+            if (!force && state.tutorialCompleted) return;
+            document.getElementById("tutorial-overlay").classList.add("active");
+            updateTutorialContent();
+        }
+
+        function closeTutorial() {
+            document.getElementById("tutorial-overlay").classList.remove("active");
+            state.tutorialCompleted = true;
+            saveState();
+        }
+
+        function advanceTutorial() {
+            tutorialStep++;
+            if (tutorialStep > 3) {
+                closeTutorial();
+                return;
+            }
+            updateTutorialContent();
+        }
+
+        function updateTutorialContent() {
+            const steps = [
+                "Khởi động bằng Placement Test để xác định level.",
+                "Ôn tập từ vựng với Word of the Day và flashcard.",
+                "Theo dõi kế hoạch học trong Study Planner và nhận nhắc nhở.",
+                "Thử sức với Mock Test để cập nhật điểm dự đoán."
+            ];
+            document.getElementById("tutorial-text").textContent = steps[tutorialStep];
+            const dots = document.querySelectorAll("#tutorial-progress span");
+            dots.forEach((dot, idx) => dot.classList.toggle("active", idx === tutorialStep));
+        }
+
+        function registerServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js').catch(() => {
+                    logError('Không thể kích hoạt offline mode.');
+                });
+            }
+        }
+
+        function updateHeroChart() {
+            const canvas = document.getElementById("hero-chart");
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const history = state.simulatorHistory.slice(-6);
+            const width = canvas.width;
+            const height = canvas.height;
+            const barWidth = width / (history.length || 6);
+            ctx.fillStyle = "rgba(56,189,248,0.5)";
+            history.forEach((item, idx) => {
+                const barHeight = (item.score / 990) * (height - 40);
+                ctx.fillRect(idx * barWidth + 20, height - barHeight - 20, barWidth - 30, barHeight);
+                ctx.fillStyle = "rgba(148,163,184,0.6)";
+                ctx.fillText(item.score, idx * barWidth + 24, height - barHeight - 24);
+                ctx.fillStyle = "rgba(56,189,248,0.5)";
+            });
+        }
+
+        window.addEventListener("beforeunload", saveState);
+    </script>
 </body>
 </html>
